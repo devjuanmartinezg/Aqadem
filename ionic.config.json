@@ -1,0 +1,7 @@
+{
+  "name": "Aqadem",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
