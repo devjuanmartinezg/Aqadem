@@ -1,4 +1,4 @@
-ion-content.login-content {
+ion-content.loginContent {
     --background: #105B88;
     display: flex;
     flex-direction: column;
@@ -19,13 +19,13 @@ ion-content.login-content {
     width: 100%;   
 }
 
-.login-image-wrapper {    
+.loginImageWrapper {    
     width: 170px;
     height: 170px;
     margin: 0 auto 24px auto;
 }
 
-.login-image {
+.loginImage {
     width: 100%;
     height: 100%;
 }
@@ -44,10 +44,14 @@ ion-button {
     width: 100%;
     max-width: 320px;
     margin: 0 auto 24px auto;
+    font-weight: bold;
 }
 
 .warningP{
     width: 100%;
     max-width: 320px;
     margin: 0 auto 24px auto;
+    background-color: rgb(255, 107, 107);
+    padding: 20px;
+    border-radius: 15px;
 }
