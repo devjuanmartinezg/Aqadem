@@ -28,7 +28,7 @@ export class InboxPage implements OnInit {
         tipo: 'padre',
         asunto: 'Consulta sobre la tarea de...',
         hora: '10:45 AM',
-        avatar: 'assets/avatars/ana.png'
+        avatar: 'https://randomuser.me/api/portraits/women/53.jpg'
       },
       {
         id: 2,
@@ -36,7 +36,7 @@ export class InboxPage implements OnInit {
         tipo: 'alumno',
         asunto: 'Duda sobre el proyecto final',
         hora: 'Ayer',
-        avatar: 'assets/avatars/pedro.png'
+        avatar: 'https://randomuser.me/api/portraits/men/59.jpg'
       },
       {
         id: 3,
@@ -44,7 +44,7 @@ export class InboxPage implements OnInit {
         tipo: 'padre',
         asunto: 'Justificante de ausencia',
         hora: 'Ayer',
-        avatar: 'assets/avatars/default.png'
+        avatar: 'https://randomuser.me/api/portraits/men/2.jpg'
       },
       {
         id: 4,
@@ -52,7 +52,7 @@ export class InboxPage implements OnInit {
         tipo: 'alumno',
         asunto: 'Entrega de trabajo práctico',
         hora: 'Hace 2 días',
-        avatar: 'assets/avatars/default.png'
+        avatar: 'https://randomuser.me/api/portraits/women/19.jpg'
       },
     ];
 
