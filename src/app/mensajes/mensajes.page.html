@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bandeja de Entrada</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="filtroSeleccionado" (ionChange)="filtrarMensajes()">
+      <ion-segment-button value="todos">Todos</ion-segment-button>
+      <ion-segment-button value="alumnos">Alumnos</ion-segment-button>
+      <ion-segment-button value="padres">Padres</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="mensajesFiltrados.length > 0; else sinMensajes">
+    <ion-item *ngFor="let mensaje of mensajesFiltrados">
+      <ion-avatar slot="start">
+        <img [src]="mensaje.avatar" />
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ mensaje.nombre }}</h2>
+        <p>{{ mensaje.asunto }}</p>
+      </ion-label>
+      <ion-note slot="end">{{ mensaje.hora }}</ion-note>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #sinMensajes>
+    <div class="sin-mensajes">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <h2>¡Todo al día!</h2>
+      <p>No tienes mensajes nuevos.</p>
+    </div>
+  </ng-template>
+</ion-content>
+

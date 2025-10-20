@@ -1,0 +1,24 @@
+/* Colores de los avatars */
+.bg-blue { background-color: #3880ff; color: white; }
+.bg-green { background-color: #10dc60; color: white; }
+.bg-red { background-color: #f04141; color: white; }
+.bg-default { background-color: #cccccc; color: white; }
+
+/* Margen interno del contenido */
+.clases-content {
+  padding: 10px;
+}
+
+/* Separación entre cards */
+.clase-card {
+  margin-bottom: 10px;
+}
+
+/* Toolbar del buscador */
+ion-toolbar {
+  pointer-events: auto;
+}
+
+ion-searchbar {
+  pointer-events: auto;
+}
