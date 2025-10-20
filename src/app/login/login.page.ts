@@ -17,6 +17,9 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router) {}
 
+  ngOnInit() {}
+
+  // Maneja cambios de input para permitir solo alfanuméricos
   onInputChange(event: any) {
     const inputValue = event.target.value;
     const regex = /^[a-zA-Z0-9]*$/;
@@ -25,7 +28,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  login(){
+  login() {
     if (!this.username || !this.password || !this.codigoCentro) {
       this.errorMessage = 'Por favor, rellena todos los campos.';
       return;
@@ -35,12 +38,8 @@ export class LoginPage implements OnInit {
       this.errorMessage = '';
       this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
     } else {
-      this.errorMessage = 'Codigo, usuario o contraseña incorrectos.';
+      this.errorMessage = 'Código, usuario o contraseña incorrectos.';
     }
-          
-  }
-
-  ngOnInit() {
   }
 
 }
