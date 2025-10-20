@@ -1,0 +1,75 @@
+<ion-header>
+  <div class="welcome-text">
+    Bienvenido, <strong>Javier Catena</strong>
+  </div>
+  <ion-toolbar>
+    <ion-title>Panel de Control</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="dashboard-content">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Clases de hoy</ion-card-title>
+      <ion-button fill="clear" size="small" slot="end">Ver todas</ion-button>
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-icon name="calculator-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>Matemáticas</h3>
+          <p>09:00 - 10:00, Aula 101</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="book-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h3>Historia</h3>
+          <p>11:00 - 12:00, Aula 203</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Mensajes pendientes</ion-card-title>
+      <ion-button fill="clear" size="small" slot="end">Ver todos</ion-button>
+    </ion-card-header>
+    <ion-list>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" />
+        </ion-avatar>
+        <ion-label>
+          <h3>Padre de Ana Gómez</h3>
+          <p>Consulta sobre las notas...</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar" />
+        </ion-avatar>
+        <ion-label>
+          <h3>Madre de Luis Pérez</h3>
+          <p>Justificante de ausencia</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Acciones rápidas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Registrar faltas de asistencia</p>
+      <ion-button expand="block" color="primary">
+        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+        Registrar Faltas
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

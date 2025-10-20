@@ -32,7 +32,7 @@ export class LoginPage implements OnInit {
 
     if (this.codigoCentro === '12345' && this.username === 'admin' && this.password === '1234') {
       this.errorMessage = '';
-      this.navCtrl.navigateForward('/home');
+      this.navCtrl.navigateForward('/dashboard');
     } else {
       this.errorMessage = 'Codigo, usuario o contraseña incorrectos.';
     }           
