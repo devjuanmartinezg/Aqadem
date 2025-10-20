@@ -34,6 +34,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule] // 👈 Faltaba esto
+  exports: [RouterModule]
 })
 export class TabsPageRoutingModule {}

@@ -11,7 +11,7 @@ interface Mensaje {
 
 @Component({
   selector: 'app-mensajes',
-  standalone: false, // ✅ importante
+  standalone: false,
   templateUrl: './mensajes.page.html',
   styleUrls: ['./mensajes.page.scss'],
 })

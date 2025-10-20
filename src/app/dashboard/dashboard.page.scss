@@ -3,13 +3,12 @@ ion-content.dashboard-content {
   padding: 16px;
 }
 
-.welcome {
-  margin-bottom: 20px;
-  h2 {
-    font-weight: 700;
-    font-size: 24px;
-    color: #212121;
-  }
+.welcome-text {
+  text-align: center;
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 18px;
+  background-color: var(--ion-color-light);
 }
 
 ion-title {
@@ -100,10 +99,9 @@ ion-button[expand="block"] ion-icon {
   margin-right: 8px;
 }
 
-.welcome-text {
-  text-align: center;
-  padding: 10px 0;
-  font-weight: 700;
-  font-size: 18px;
-  background-color: var(--ion-color-light);
+.acciones-rapidas {
+  background: rgba(255,0,0,0.2);
+  z-index: 1000;
+  position: relative;
+  pointer-events: auto;
 }

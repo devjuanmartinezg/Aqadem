@@ -7,9 +7,15 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="dashboard-content">
 
+   <ion-button color="secondary" (click)="testClick()">
+  Test Click
+</ion-button>
+
+
+
+  <!-- Clases de hoy -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Clases de hoy</ion-card-title>
@@ -33,6 +39,7 @@
     </ion-list>
   </ion-card>
 
+  <!-- Mensajes pendientes -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Mensajes pendientes</ion-card-title>
@@ -60,16 +67,20 @@
     </ion-list>
   </ion-card>
 
+  <!-- Acciones rápidas -->
   <ion-card>
     <ion-card-header>
       <ion-card-title>Acciones rápidas</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+
+    <ion-card-content class="acciones-rapidas">
       <p>Registrar faltas de asistencia</p>
-      <ion-button expand="block" color="primary">
+      <ion-button id="btn-registrar-faltas" expand="block" color="primary" (click)="registrarFaltas()">
         <ion-icon slot="start" name="person-add-outline"></ion-icon>
         Registrar Faltas
       </ion-button>
     </ion-card-content>
   </ion-card>
+
+
 </ion-content>

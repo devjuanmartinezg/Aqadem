@@ -1,22 +1,25 @@
 <ion-tabs>
-  <ion-router-outlet></ion-router-outlet>
 
-  <ion-tab-bar slot="bottom" color="light">
-    <ion-tab-button tab="dashboard">
-      <ion-icon name="home"></ion-icon>
-      <ion-label>Inicio</ion-label>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="dashboard" [routerLink]="['/tabs/dashboard']">
+      <ion-icon name="home-outline"></ion-icon>
+      <ion-label>Dashboard</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="clases">
-      <ion-icon name="book"></ion-icon>
+
+    <ion-tab-button tab="clases" [routerLink]="['/tabs/clases']">
+      <ion-icon name="school-outline"></ion-icon>
       <ion-label>Clases</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="mensajes">
-      <ion-icon name="chatbubble"></ion-icon>
+
+    <ion-tab-button tab="mensajes" [routerLink]="['/tabs/mensajes']">
+      <ion-icon name="mail-outline"></ion-icon>
       <ion-label>Mensajes</ion-label>
     </ion-tab-button>
-    <ion-tab-button tab="perfil">
-      <ion-icon name="person"></ion-icon>
+
+    <ion-tab-button tab="perfil" [routerLink]="['/tabs/perfil']">
+      <ion-icon name="person-outline"></ion-icon>
       <ion-label>Perfil</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
+
 </ion-tabs>

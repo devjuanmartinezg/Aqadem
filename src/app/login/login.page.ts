@@ -16,6 +16,9 @@ export class LoginPage implements OnInit {
 
   constructor(private navCtrl: NavController) { }
 
+  ngOnInit() {}
+
+  // Maneja cambios de input para permitir solo alfanuméricos
   onInputChange(event: any) {
     const inputValue = event.target.value;
     const regex = /^[a-zA-Z0-9]*$/;
@@ -24,7 +27,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  login(){
+  login() {
     if (!this.username || !this.password || !this.codigoCentro) {
       this.errorMessage = 'Por favor, rellena todos los campos.';
       return;
@@ -34,11 +37,8 @@ export class LoginPage implements OnInit {
       this.errorMessage = '';
       this.navCtrl.navigateRoot('/tabs/dashboard');
     } else {
-      this.errorMessage = 'Codigo, usuario o contraseña incorrectos.';
-    }           
-  }
-
-  ngOnInit() {
+      this.errorMessage = 'Código, usuario o contraseña incorrectos.';
+    }
   }
 
 }
