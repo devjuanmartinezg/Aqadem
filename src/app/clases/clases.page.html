@@ -2,27 +2,31 @@
   <ion-toolbar>
     <ion-title class="ion-text-center">Mis Clases</ion-title>
     <ion-buttons slot="end">
-      <ion-button aria-label="search-btn" (click)="toggleSearch()">
+      <ion-button (click)="toggleSearch()">
         <ion-icon name="search-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="clases-content" fullscreen>
+<!-- aria-label="search-btn" -->
 
-  <!-- Buscador dentro del content -->
+<ion-content class="clases-content" fullscreen>
+  <ion-button expand="block" (click)="toggleSearch()">Probar búsqueda</ion-button>
+  <ion-button expand="block">Login</ion-button>
+  <!-- 🔍 Buscador dentro del content -->
   <ion-toolbar *ngIf="showSearch">
     <ion-searchbar
       [(ngModel)]="searchText"
       (ionInput)="filterClases()"
       (ionClear)="onClear()"
       placeholder="Buscar asignatura..."
-      debounce="200">
+      debounce="200"
+      autofocus>
     </ion-searchbar>
   </ion-toolbar>
 
-  <!-- Lista de clases -->
+  <!-- 📚 Lista de clases -->
   <ion-card *ngFor="let clase of filteredClases" class="clase-card">
     <ion-item lines="none">
       <ion-avatar slot="start" [ngClass]="getAvatarClass(clase.icon)">

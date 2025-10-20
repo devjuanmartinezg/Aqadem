@@ -22,3 +22,18 @@ ion-toolbar {
 ion-searchbar {
   pointer-events: auto;
 }
+
+ion-header, ion-toolbar, ion-button {
+  pointer-events: none;
+}
+
+ion-header {
+  z-index: 10;
+  position: relative;
+}
+
+ion-header, ion-toolbar, ion-buttons, ion-button {
+  pointer-events: auto !important;
+  z-index: 10;
+  position: relative;
+}

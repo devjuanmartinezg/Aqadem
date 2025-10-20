@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 @Component({
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private navCtrl: NavController) { }
+  constructor(private router: Router) {}
 
   onInputChange(event: any) {
     const inputValue = event.target.value;
@@ -32,10 +33,11 @@ export class LoginPage implements OnInit {
 
     if (this.codigoCentro === '12345' && this.username === 'admin' && this.password === '1234') {
       this.errorMessage = '';
-      this.navCtrl.navigateRoot('/tabs/dashboard');
+      this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
     } else {
       this.errorMessage = 'Codigo, usuario o contraseña incorrectos.';
-    }           
+    }
+          
   }
 
   ngOnInit() {

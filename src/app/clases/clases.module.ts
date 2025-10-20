@@ -12,11 +12,10 @@ import { ClasesPage } from './clases.page';
 @NgModule({
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    IonicModule,
     FormsModule,
+    IonicModule,
     ClasesPageRoutingModule
-  ],
+],
   declarations: [ClasesPage]
 })
 export class ClasesPageModule {}

@@ -24,6 +24,10 @@ export class ClasesPage {
   toggleSearch() {
     this.showSearch = !this.showSearch;
     if (!this.showSearch) this.onClear();
+
+    console.log('Lupa clicada 🕵️‍♀️');
+    this.showSearch = !this.showSearch;
+    if (!this.showSearch) this.onClear();
   }
 
   filterClases() {

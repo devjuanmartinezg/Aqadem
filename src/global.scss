@@ -35,3 +35,11 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-router-outlet,
+ion-content,
+ion-tabs,
+ion-page {
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
