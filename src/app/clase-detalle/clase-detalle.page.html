@@ -1,0 +1,193 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ claseNombre }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <!-- Tabs -->
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="selectedTab" (ionChange)="segmentChanged($event)" mode="md">
+      <ion-segment-button value="temario">
+        <ion-icon name="book-outline"></ion-icon>
+        <ion-label>Temario</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="alumnos">
+        <ion-icon name="people-outline"></ion-icon>
+        <ion-label>Alumnos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="historial">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-label>Historial</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="clase-detalle-content">
+  <!-- Temario Tab -->
+  <div *ngIf="selectedTab === 'temario'" class="tab-content">
+    <ion-card *ngFor="let unidad of unidades" class="unidad-card" (click)="openUnidad(unidad)">
+      <ion-item lines="none" button>
+        <div slot="start" class="unidad-icon" [ngClass]="'icon-' + unidad.iconColor">
+          <ion-icon [name]="unidad.icon"></ion-icon>
+        </div>
+
+        <ion-label class="ion-text-wrap">
+          <h2 class="unidad-titulo">Unidad {{ unidad.numero }}: {{ unidad.titulo }}</h2>
+          <p class="unidad-estado">
+            Estado: <span [style.color]="'var(--ion-color-' + unidad.estadoColor + ')'">{{ unidad.estado }}</span>
+          </p>
+          <p class="unidad-examen">
+            <ion-icon name="calendar-outline"></ion-icon>
+            Examen: {{ unidad.examen }}
+          </p>
+        </ion-label>
+
+        <ion-icon slot="end" name="chevron-forward-outline" class="chevron-icon"></ion-icon>
+      </ion-item>
+    </ion-card>
+  </div>
+
+  <!-- Alumnos Tab -->
+  <div *ngIf="selectedTab === 'alumnos'" class="tab-content">
+    <ion-grid class="alumnos-grid">
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="option-card" button (click)="openListaAlumnos()">
+            <ion-card-content>
+              <div class="option-icon blue-bg">
+                <ion-icon name="list-outline"></ion-icon>
+              </div>
+              <h3 class="option-title">Lista de Alumnos</h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card class="option-card" button (click)="openTomaAsistencia()">
+            <ion-card-content>
+              <div class="option-icon green-bg">
+                <ion-icon name="checkmark-done-outline"></ion-icon>
+              </div>
+              <h3 class="option-title">Toma de Asistencia</h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6">
+          <ion-card class="option-card" button (click)="openCalificaciones()">
+            <ion-card-content>
+              <div class="option-icon orange-bg">
+                <ion-icon name="bar-chart-outline"></ion-icon>
+              </div>
+              <h3 class="option-title">Calificaciones</h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6">
+          <ion-card class="option-card" button (click)="openAnotaciones()">
+            <ion-card-content>
+              <div class="option-icon red-bg">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+              </div>
+              <h3 class="option-title">Anotaciones</h3>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Historial Tab -->
+  <div *ngIf="selectedTab === 'historial'" class="tab-content historial-tab">
+    <!-- Added header with title and filter button -->
+    <div class="historial-header">
+      <h2 class="historial-title">Registro de Actividad</h2>
+      <ion-button fill="clear" class="filter-button" (click)="openFilter()">
+        <ion-icon name="funnel-outline" slot="start"></ion-icon>
+        Filtrar
+      </ion-button>
+    </div>
+
+    <!-- Replaced simple cards with grouped activity list -->
+    <ion-list class="historial-list">
+      <!-- Hoy, 15 de Mayo -->
+      <ion-list-header class="date-header">
+        <ion-label>Hoy, 15 de Mayo</ion-label>
+      </ion-list-header>
+
+      <ion-item class="activity-item" lines="none">
+        <div slot="start" class="activity-icon green-bg">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+        </div>
+        <ion-label class="ion-text-wrap">
+          <h3>Nueva calificación publicada</h3>
+          <p>Examen - Tema 5: Los Ecosistemas</p>
+        </ion-label>
+        <div slot="end" class="activity-time">10:45 AM</div>
+      </ion-item>
+
+      <!-- Ayer, 14 de Mayo -->
+      <ion-list-header class="date-header">
+        <ion-label>Ayer, 14 de Mayo</ion-label>
+      </ion-list-header>
+
+      <ion-item class="activity-item" lines="none">
+        <div slot="start" class="activity-icon blue-bg">
+          <ion-icon name="document-text-outline"></ion-icon>
+        </div>
+        <ion-label class="ion-text-wrap">
+          <h3>Temario actualizado</h3>
+          <p>Se añadió el "Tema 6: La Célula"</p>
+        </ion-label>
+        <div slot="end" class="activity-time">03:20 PM</div>
+      </ion-item>
+
+      <ion-item class="activity-item" lines="none">
+        <div slot="start" class="activity-icon red-bg">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+        </div>
+        <ion-label class="ion-text-wrap">
+          <h3>Anotación para Carlos Pérez</h3>
+          <p>Falta de material en clase</p>
+        </ion-label>
+        <div slot="end" class="activity-time">09:15 AM</div>
+      </ion-item>
+
+      <!-- 12 de Mayo -->
+      <ion-list-header class="date-header">
+        <ion-label>12 de Mayo</ion-label>
+      </ion-list-header>
+
+      <ion-item class="activity-item" lines="none">
+        <div slot="start" class="activity-icon orange-bg">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </div>
+        <ion-label class="ion-text-wrap">
+          <h3>Próximo evento creado</h3>
+          <p>Entrega de trabajo - Herbario</p>
+        </ion-label>
+        <div slot="end" class="activity-time">11:00 AM</div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Floating Action Button -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNewItem()" color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
