@@ -1,39 +1,214 @@
-/* Colores de los avatars */
-.bg-blue { background-color: #3880ff; color: white; }
-.bg-green { background-color: #10dc60; color: white; }
-.bg-red { background-color: #f04141; color: white; }
-.bg-default { background-color: #cccccc; color: white; }
+/* Colores de los avatares */
+.bg-blue { background-color: #c5d9f1; color: #3880ff; }
+.bg-green { background-color: #d4f5e8; color: #10dc60; }
+.bg-orange { background-color: #ffe8d1; color: #ff9500; }
+.bg-default { background-color: #e8e8e8; color: #666; }
 
-/* Margen interno del contenido */
+/* Barra superior del encabezado */
+ion-header ion-toolbar {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  border-bottom: 1px solid #f0f0f0;
+
+  ion-title {
+    font-weight: 700;
+    font-size: 1.3em;
+    text-align: center;
+    flex: 1;
+  }
+
+  ion-button {
+    --color: #607d8b;
+    font-size: 1.3em;
+  }
+}
+
+/* Contenido principal */
 .clases-content {
-  padding: 10px;
+  padding: 16px 0;
+  background-color: #f9f9f9;
 }
 
-/* Separación entre cards */
+/* Lista de clases */
+.clases-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+/* Tarjeta de clase */
 .clase-card {
-  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  
+  &:active {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
 }
 
-/* Toolbar del buscador */
-ion-toolbar {
-  pointer-events: auto;
+.clase-card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
+/* Cabecera de la clase */
+.clase-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Icono de la clase */
+.clase-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Información de la clase */
+.clase-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.clase-nombre {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a1a;
+  letter-spacing: -0.3px;
+}
+
+.clase-detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #888;
+}
+
+/* Línea con icono y texto */
+.detalle-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  
+  ion-icon {
+    font-size: 14px;
+    color: #999;
+  }
+  
+  span {
+    color: #888;
+  }
+}
+
+/* Icono de navegación lateral */
+.chevron-icon {
+  font-size: 24px;
+  color: #d0d0d0;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+/* Parte inferior de la tarjeta */
+.clase-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+/* Información de alumnos */
+.alumnos-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+  
+  ion-icon {
+    font-size: 16px;
+    color: #999;
+  }
+}
+
+/* Botón de detalles */
+.btn-detalles {
+  --color: #3880ff;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: none;
+  padding: 0;
+  height: auto;
+  letter-spacing: -0.2px;
+  
+  &::part(native) {
+    text-decoration: none;
+  }
+}
+
+/* Barra del buscador */
+.search-toolbar {
+  --background: #f9f9f9;
+  --border-color: transparent;
+  padding: 8px 0;
+}
+
+/* Caja del buscador */
 ion-searchbar {
-  pointer-events: auto;
+  --background: white;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-ion-header, ion-toolbar, ion-button {
-  pointer-events: none;
-}
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 480px) {
+  .clase-card-content {
+    padding: 14px;
+    gap: 10px;
+  }
 
-ion-header {
-  z-index: 10;
-  position: relative;
-}
+  .clase-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
 
-ion-header, ion-toolbar, ion-buttons, ion-button {
-  pointer-events: auto !important;
-  z-index: 10;
-  position: relative;
+  .clase-nombre {
+    font-size: 16px;
+  }
+
+  .clase-detalles {
+    font-size: 12px;
+  }
+
+  .detalle-item {
+    gap: 4px;
+    
+    ion-icon {
+      font-size: 12px;
+    }
+  }
 }

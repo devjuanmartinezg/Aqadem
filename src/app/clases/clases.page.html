@@ -9,11 +9,9 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- aria-label="search-btn" -->
-
 <ion-content class="clases-content" fullscreen>
-  <!-- 🔍 Buscador dentro del content -->
-  <ion-toolbar *ngIf="showSearch">
+  <!-- Buscador -->
+  <ion-toolbar *ngIf="showSearch" class="search-toolbar">
     <ion-searchbar
       [(ngModel)]="searchText"
       (ionInput)="filterClases()"
@@ -24,30 +22,42 @@
     </ion-searchbar>
   </ion-toolbar>
 
-  <!-- 📚 Lista de clases -->
-  <ion-card *ngFor="let clase of filteredClases" class="clase-card">
-    <ion-item lines="none">
-      <ion-avatar slot="start" [ngClass]="getAvatarClass(clase.icon)">
-        <ion-icon [name]="clase.icon"></ion-icon>
-      </ion-avatar>
+  <!-- Lista de clases -->
+  <div class="clases-list">
+    <div *ngFor="let clase of filteredClases" class="clase-card">
+      <div class="clase-card-content">
+        <!-- Encabezado de la clase -->
+        <div class="clase-header">
+          <div [ngClass]="['clase-icon', getAvatarClass(clase.icon)]">
+            <ion-icon [name]="clase.icon"></ion-icon>
+          </div>
+          <div class="clase-info">
+            <h2 class="clase-nombre">{{ clase.nombre }}</h2>
+            <div class="clase-detalles">
+              <span class="detalle-item">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>{{ clase.horario }}</span>
+              </span>
+              <span class="detalle-item">
+                <ion-icon name="location-outline"></ion-icon>
+                <span>{{ clase.salon }}</span>
+              </span>
+            </div>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="chevron-icon"></ion-icon>
+        </div>
 
-      <ion-label class="ion-text-wrap">
-        <h2>{{ clase.nombre }}</h2>
-        <p>
-          <ion-icon name="time-outline"></ion-icon> {{ clase.horario }}
-          <ion-icon name="location-outline" class="ml-3"></ion-icon> {{ clase.salon }}
-        </p>
-      </ion-label>
-
-      <ion-button fill="clear" slot="end" class="btn-detalles">
-        Ver detalles
-      </ion-button>
-    </ion-item>
-
-    <ion-item lines="none">
-      <ion-icon slot="start" name="people-outline"></ion-icon>
-      <ion-label>{{ clase.alumnos }} Alumnos</ion-label>
-    </ion-item>
-  </ion-card>
-
+        <!-- Pie de la clase -->
+        <div class="clase-footer">
+          <div class="alumnos-info">
+            <ion-icon name="people-outline"></ion-icon>
+            <span>{{ clase.alumnos }} Alumnos</span>
+          </div>
+          <ion-button fill="clear" class="btn-detalles">
+            Ver detalles
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

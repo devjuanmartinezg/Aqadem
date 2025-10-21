@@ -1,42 +1,108 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Bandeja de Entrada</ion-title>
+  <!-- Barra superior con buscador y botón para crear nuevo mensaje -->
+  <ion-toolbar class="header-toolbar">
+
+    <!-- Botón de búsqueda (futura implementación o apertura de barra de búsqueda) -->
+    <ion-buttons slot="start">
+      <ion-button fill="clear" class="search-btn">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!-- Título principal de la página -->
+    <ion-title class="header-title">Bandeja de Entrada</ion-title>
+
+    <!-- Botón para redactar o crear un nuevo mensaje -->
     <ion-buttons slot="end">
-      <ion-button fill="clear">
-        <ion-icon name="create-outline"></ion-icon>
+      <ion-button fill="clear" class="create-btn">
+        <ion-icon name="create"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 
-  <ion-toolbar>
-    <ion-segment [(ngModel)]="filtroSeleccionado" (ionChange)="filtrarMensajes()">
-      <ion-segment-button value="todos">Todos</ion-segment-button>
-      <ion-segment-button value="alumnos">Alumnos</ion-segment-button>
-      <ion-segment-button value="padres">Padres</ion-segment-button>
-    </ion-segment>
+  <!-- Filtros principales (tipo pestañas) para organizar los mensajes -->
+  <ion-toolbar class="filters-toolbar">
+    <div class="filters-container">
+      
+      <!-- Filtro: mostrar todos los mensajes -->
+      <button 
+        class="filter-btn" 
+        [class.active]="filtroSeleccionado === 'todos'"
+        (click)="filtroSeleccionado = 'todos'; filtrarMensajes()">
+        Todos
+      </button>
+
+      <!-- Filtro: mostrar solo los no leídos -->
+      <button 
+        class="filter-btn" 
+        [class.active]="filtroSeleccionado === 'no-leidos'"
+        (click)="filtroSeleccionado = 'no-leidos'; filtrarMensajes()">
+        No Leídos
+      </button>
+
+      <!-- Filtro: mensajes enviados por alumnos -->
+      <button 
+        class="filter-btn" 
+        [class.active]="filtroSeleccionado === 'alumnos'"
+        (click)="filtroSeleccionado = 'alumnos'; filtrarMensajes()">
+        Alumnos
+      </button>
+
+      <!-- Filtro: mensajes enviados por padres -->
+      <button 
+        class="filter-btn" 
+        [class.active]="filtroSeleccionado === 'padres'"
+        (click)="filtroSeleccionado = 'padres'; filtrarMensajes()">
+        Padres
+      </button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="mensajesFiltrados.length > 0; else sinMensajes">
-    <ion-item *ngFor="let mensaje of mensajesFiltrados">
-      <ion-avatar slot="start">
-        <img [src]="mensaje.avatar" />
-      </ion-avatar>
-      <ion-label>
-        <h2>{{ mensaje.nombre }}</h2>
-        <p>{{ mensaje.asunto }}</p>
-      </ion-label>
-      <ion-note slot="end">{{ mensaje.hora }}</ion-note>
-    </ion-item>
-  </ion-list>
 
+  <!-- Lista de mensajes (solo se muestra si hay mensajes filtrados) -->
+  <div class="mensajes-container" *ngIf="mensajesFiltrados.length > 0; else sinMensajes">
+
+    <!-- Cada mensaje individual -->
+    <div class="mensaje-item" 
+         *ngFor="let mensaje of mensajesFiltrados" 
+         [class.no-leido]="!mensaje.leido">
+      
+      <!-- Barra lateral azul solo visible si el mensaje está sin leer -->
+      <div class="mensaje-barra" *ngIf="!mensaje.leido"></div>
+
+      <!-- Avatar del remitente -->
+      <ion-avatar class="mensaje-avatar">
+        <img [src]="mensaje.avatar" [alt]="mensaje.nombre" />
+      </ion-avatar>
+
+      <!-- Contenido principal del mensaje -->
+      <div class="mensaje-content">
+        <div class="mensaje-header">
+          <!-- Nombre del remitente -->
+          <h3 class="mensaje-nombre">{{ mensaje.nombre }}</h3>
+          <!-- Hora del mensaje, marcada si es de hoy -->
+          <span class="mensaje-hora" [class.hoy]="mensaje.esHoy">{{ mensaje.hora }}</span>
+        </div>
+
+        <!-- Asunto o resumen del mensaje -->
+        <p class="mensaje-asunto">{{ mensaje.asunto }}</p>
+      </div>
+
+      <!-- Flecha al final para indicar que se puede abrir -->
+      <ion-icon name="chevron-forward" class="mensaje-arrow"></ion-icon>
+    </div>
+  </div>
+
+  <!-- Estado vacío: cuando no hay mensajes en la bandeja -->
   <ng-template #sinMensajes>
     <div class="sin-mensajes">
-      <ion-icon name="checkmark-circle-outline"></ion-icon>
-      <h2>¡Todo al día!</h2>
-      <p>No tienes mensajes nuevos.</p>
+      <div class="empty-icon-container">
+        <ion-icon name="checkmark-circle" class="empty-icon"></ion-icon>
+      </div>
+      <h2 class="empty-title">¡Todo al día!</h2>
+      <p class="empty-subtitle">No tienes mensajes nuevos.</p>
     </div>
   </ng-template>
 </ion-content>
-
