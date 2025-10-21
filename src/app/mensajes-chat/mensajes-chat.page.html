@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>
+      {{ mensajeActual?.nombre }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="verPerfil()">
+        <ion-icon name="person-circle-outline" style="font-size: 28px;"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat-content">
+  <div class="chat-messages">
+    <div *ngFor="let msg of conversacion"
+         [ngClass]="{'from-me': msg.fromMe, 'from-them': !msg.fromMe}"
+         class="chat-message">
+      <ion-avatar class="avatar-chat" (click)="goToPerfil(msg.userId)">
+        <img [src]="getAvatar(msg.userId)" />
+      </ion-avatar>
+      <div class="bubble">
+        <p>{{ msg.texto }}</p>
+        <span class="hora">{{ msg.hora }}</span>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-input [(ngModel)]="nuevoMensaje" placeholder="Escribe un mensaje..."></ion-input>
+    <ion-buttons slot="end">
+      <ion-button (click)="enviarMensaje()">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

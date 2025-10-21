@@ -14,17 +14,18 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
   },
+  {
+    path: 'mensajes-chat/:id',
+    loadChildren: () => import('./mensajes-chat/mensajes-chat.module').then(m => m.MensajesChatPageModule),
+  },
+  {
+  path: 'mensajes-chat-perfil/:id',
+  loadChildren: () => import('./mensajes-chat-perfil/mensajes-chat-perfil.module').then(m => m.MensajesChatPerfilPageModule)
+  }
 
-  
 ];
-
-{loadChildren: () =>
-      import('./tabs/tabs.module').then(m => m.TabsPageModule)
-}
-
-
 
 @NgModule({
   imports: [

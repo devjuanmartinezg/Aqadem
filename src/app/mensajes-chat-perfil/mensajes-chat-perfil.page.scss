@@ -1,0 +1,60 @@
+.perfil-content {
+  --background: #f8f9fa;
+}
+.perfil-header {
+  display: flex;
+  align-items: center;
+  margin: 24px 0 12px 20px;
+  gap: 20px;
+}
+.perfil-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #eee;
+}
+.perfil-grado {
+  color: #89a0b7;
+  font-weight: 600;
+}
+.perfil-tipo {
+  font-style: italic;
+  color: #557799;
+  margin-top: 4px;
+}
+.perfil-btn-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.perfil-tabs {
+  margin: 0 0 16px 0;
+}
+.bloque-info {
+  margin: 10px 16px 80px 16px;
+}
+.cuadro-dato {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 5px #0001;
+  text-align: center;
+}
+.cuadro-dato ion-icon {
+  color: #2196f3;
+  font-size: 1.7em;
+  margin-bottom: 4px;
+}
+.mini-text {
+  color: #b3becc;
+  font-size: 0.9em;
+}
+.info-medica {
+  margin-bottom: 14px;
+}
+.alergia {
+  color: #d33135;
+  font-weight: 600;
+}

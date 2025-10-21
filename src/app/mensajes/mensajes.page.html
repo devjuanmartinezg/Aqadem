@@ -2,20 +2,20 @@
   <!-- Barra superior con buscador y botón para crear nuevo mensaje -->
   <ion-toolbar class="header-toolbar">
 
-    <!-- Botón de búsqueda (futura implementación o apertura de barra de búsqueda) -->
+    <!-- Botón para redactar o crear un nuevo mensaje -->
     <ion-buttons slot="start">
-      <ion-button fill="clear" class="search-btn">
-        <ion-icon name="search"></ion-icon>
+      <ion-button fill="clear" class="create-btn">
+        <ion-icon name="create"></ion-icon>
       </ion-button>
     </ion-buttons>
 
     <!-- Título principal de la página -->
     <ion-title class="header-title">Bandeja de Entrada</ion-title>
 
-    <!-- Botón para redactar o crear un nuevo mensaje -->
+    <!-- Botón de búsqueda (futura implementación o apertura de barra de búsqueda) -->
     <ion-buttons slot="end">
-      <ion-button fill="clear" class="create-btn">
-        <ion-icon name="create"></ion-icon>
+      <ion-button fill="clear" class="search-btn">
+        <ion-icon name="search"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -67,7 +67,8 @@
     <!-- Cada mensaje individual -->
     <div class="mensaje-item" 
          *ngFor="let mensaje of mensajesFiltrados" 
-         [class.no-leido]="!mensaje.leido">
+         [class.no-leido]="!mensaje.leido"
+         (click)="abrirChat(mensaje.id)">
       
       <!-- Barra lateral azul solo visible si el mensaje está sin leer -->
       <div class="mensaje-barra" *ngIf="!mensaje.leido"></div>
