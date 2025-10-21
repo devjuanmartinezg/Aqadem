@@ -36,10 +36,8 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-ion-router-outlet,
-ion-content,
-ion-tabs,
-ion-page {
-  pointer-events: auto !important;
-  z-index: 1 !important;
+/* Aplica para todos los ion-input en modo md */
+ion-input.md input {
+  caret-color: #3880ff !important; /* Azul */
 }
+
