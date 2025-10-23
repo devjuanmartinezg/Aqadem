@@ -9,7 +9,17 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@angular/common": "^20.3.6",
+    "@angular/compiler": "^20.3.6",
+    "@angular/core": "^20.3.6",
+    "@angular/forms": "^20.3.6",
+    "@angular/platform-browser": "^20.3.6",
+    "@angular/platform-browser-dynamic": "^20.3.6",
+    "@angular/router": "^20.3.6",
+    "@capacitor/android": "7.4.3",
     "@hookform/resolvers": "^3.10.0",
+    "@ionic/angular": "^8.7.7",
+    "@ionic/angular-toolkit": "^12.3.0",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
     "@radix-ui/react-aspect-ratio": "1.1.1",
@@ -54,13 +64,18 @@
     "react-hook-form": "^7.60.0",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.4",
+    "rxjs": "^7.8.2",
     "sonner": "^1.7.4",
     "tailwind-merge": "^3.3.1",
     "tailwindcss-animate": "^1.0.7",
-    "vaul": "^0.9.9",
-    "zod": "3.25.76"
+    "zod": "3.25.76",
+    "zone.js": "^0.15.1"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.3.6",
+    "@angular/cli": "^20.3.6",
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^7.4.3",
     "@tailwindcss/postcss": "^4.1.9",
     "@types/node": "^22",
     "@types/react": "^19",
