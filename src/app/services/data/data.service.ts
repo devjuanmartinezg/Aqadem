@@ -4,15 +4,33 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 
+export interface Alumno {
+  id: number;
+  nombre: string;
+  apellidos: string;
+  email: string;
+}
+
+export interface Clase {
+  claseId: number;
+  nombreClase: string;
+  alumnos: Alumno[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataService { // Asegúrate que tu clase se llame DataService
 
   // Ruta a tu archivo JSON
   private readonly alumnosDataPath = 'assets/data/alumnos.json';
 
   constructor(private http: HttpClient) { }
+
+  getClases(): Observable<Clase[]> {
+    return this.http.get<Clase[]>(this.alumnosDataPath);
+  }
 
   /**
    * Obtiene la lista de alumnos buscando en el JSON local por el ID de la clase.
