@@ -1,30 +1,31 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from "@angular/router";
+import { NavController } from "@ionic/angular";
 
-interface PerfilUsuario {
-  id: number;
+// ✅ Modelo actualizado
+export interface PerfilUsuario {
   nombre: string;
+  tipo: string;
   grado: string;
-  tipo: "alumno" | "padre" | "madre";
+  fechaNacimiento: string;
   avatar: string;
   contactosEmergencia: { nombre: string; parentesco: string }[];
-  fechaNacimiento: string;
-  idEstudiante: string;
-  alergias?: string;
   emailsPadres: string[];
+  alergias?: string;
+  aspectosImportantes?: string[];
 }
 
 @Component({
-  selector: 'app-mensajes-chat-perfil',
-  templateUrl: './mensajes-chat-perfil.page.html',
-  styleUrls: ['./mensajes-chat-perfil.page.scss'],
+  selector: "app-mensajes-chat-perfil",
+  templateUrl: "./mensajes-chat-perfil.page.html",
+  styleUrls: ["./mensajes-chat-perfil.page.scss"],
   standalone: false,
 })
 export class MensajesChatPerfilPage implements OnInit {
   usuario?: PerfilUsuario;
 
-  usuariosDB: PerfilUsuario[] = [
+
+  usuariosDB: (PerfilUsuario & { id: number })[] = [
     {
       id: 1,
       nombre: "Ana García",
@@ -33,33 +34,29 @@ export class MensajesChatPerfilPage implements OnInit {
       avatar: "https://randomuser.me/api/portraits/women/53.jpg",
       contactosEmergencia: [
         { nombre: "Juan Martínez", parentesco: "Padre" },
-        { nombre: "Luisa García", parentesco: "Madre" }
+        { nombre: "Luisa García", parentesco: "Madre" },
       ],
       fechaNacimiento: "",
-      idEstudiante: "",
       alergias: "",
-      emailsPadres: [
-        "juan.martinez@email.com",
-        "luisa.garcia@email.com"
-      ]
+      emailsPadres: ["juan.martinez@email.com", "luisa.garcia@email.com"],
     },
     {
       id: 2,
       nombre: "Pedro Martínez",
-      grado: "4º B",      
+      grado: "4º B",
       tipo: "alumno",
       avatar: "https://randomuser.me/api/portraits/men/59.jpg",
       contactosEmergencia: [
         { nombre: "Carlos Martínez", parentesco: "Padre" },
-        { nombre: "Marta Díaz", parentesco: "Madre" }
+        { nombre: "Marta Díaz", parentesco: "Madre" },
       ],
       fechaNacimiento: "10/10/2013",
-      idEstudiante: "#22334",
-      alergias: "",
+      alergias: "Polen",
       emailsPadres: [
         "carlos.martinez@email.com",
-        "marta.diaz@email.com"
-      ]
+        "marta.diaz@email.com",
+      ],
+      aspectosImportantes: ["Suele tener ansiedad en espacios ruidosos"],
     },
     {
       id: 3,
@@ -67,42 +64,43 @@ export class MensajesChatPerfilPage implements OnInit {
       grado: "N/A",
       tipo: "padre",
       avatar: "https://randomuser.me/api/portraits/men/2.jpg",
-      contactosEmergencia: [
-        { nombre: "Ana Gómez", parentesco: "Madre" }
-      ],
+      contactosEmergencia: [{ nombre: "Ana Gómez", parentesco: "Madre" }],
       fechaNacimiento: "",
-      idEstudiante: "",
       alergias: "",
-      emailsPadres: [
-        "ana.gomez@email.com"
-      ]
+      emailsPadres: ["ana.gomez@email.com"],
     },
     {
       id: 4,
       nombre: "Laura Fernández",
       grado: "4º A",
-      tipo: "alumno",
+      tipo: "alumna",
       avatar: "https://randomuser.me/api/portraits/women/19.jpg",
       contactosEmergencia: [
         { nombre: "Carlos Fernández", parentesco: "Padre" },
-        { nombre: "María López", parentesco: "Madre" }
+        { nombre: "María López", parentesco: "Madre" },
       ],
       fechaNacimiento: "10/09/2012",
-      idEstudiante: "#99887",
       alergias: "Ninguna",
       emailsPadres: [
         "carlos.fernandez@email.com",
-        "maria.lopez@email.com"
-      ]
-    }
+        "maria.lopez@email.com",
+      ],
+      aspectosImportantes: [
+        "Le cuesta concentrarse tras el recreo",
+        "Evitar comidas con frutos secos",
+      ],
+    },
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router, private navCtrl: NavController) {}
+  constructor(
+    private route: ActivatedRoute,
+    private navCtrl: NavController
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      const idParam = Number(params.get('id'));
-      this.usuario = this.usuariosDB.find(u => u.id === idParam);
+    this.route.paramMap.subscribe((params) => {
+      const idParam = Number(params.get("id"));
+      this.usuario = this.usuariosDB.find((u) => u.id === idParam);
     });
   }
 
