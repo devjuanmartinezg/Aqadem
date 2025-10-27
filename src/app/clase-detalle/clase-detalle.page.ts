@@ -109,4 +109,7 @@ export default class ClaseDetallePage implements OnInit {
     console.log("Agregar nuevo item en tab:", this.selectedTab)
     // Open modal or navigate to add page based on selected tab
   }
+
+  
+
 }
