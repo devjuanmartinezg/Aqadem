@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Pasar Lista - Clase ID: {{ claseId }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let alumno of alumnosAsistencia">
+      
+      <ion-label>
+        <h3>{{ alumno.nombre }} {{ alumno.apellidos }}</h3>
+      </ion-label>
+      
+      <ion-radio-group 
+        slot="end" 
+        [(ngModel)]="alumno.asistencia" 
+        [name]="'asistencia-' + alumno.id"
+        class="horizontal-radio-group"  >
+        <ion-radio value="P" color="success" title="Presente"></ion-radio>
+        <ion-radio value="A" color="danger" title="Ausente"></ion-radio>
+        <ion-radio value="J" color="warning" title="Justificada"></ion-radio>
+      </ion-radio-group>
+      
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button 
+      expand="full" 
+      size="large" 
+      (click)="guardarAsistencia()"
+    >
+      <ion-icon name="save-outline" slot="start"></ion-icon>
+      Guardar Asistencia
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

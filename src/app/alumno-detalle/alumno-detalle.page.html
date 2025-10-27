@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{ alumno?.nombre }} {{ alumno?.apellidos }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <div *ngIf="alumno" class="ion-padding">
+    
+    <div class="avatar-header ion-text-center">
+      <ion-icon name="person-circle" color="primary" class="main-avatar"></ion-icon>
+      <h2>{{ alumno.nombre }} {{ alumno.apellidos }}</h2>
+      <p class="matricula-id">ID de Matrícula: {{ alumno.id }}</p>
+      <ion-chip color="secondary">
+        <ion-label>Clase: {{ alumno.claseAsignada || 'No Asignada' }}</ion-label>
+      </ion-chip>
+    </div>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Contacto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon slot="start" name="mail-outline" color="medium"></ion-icon>
+          <ion-label>
+            <p>Email</p>
+            <h3>{{ alumno.email }}</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-icon slot="start" name="call-outline" color="medium"></ion-icon>
+          <ion-label>
+            <p>Teléfono</p>
+            <h3>{{ alumno.telefono || 'No disponible' }}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Detalles Académicos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label>
+            <p>Última Nota</p>
+            <h3>{{ alumno.ultimaNota || 'N/A' }}</h3>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            <p>Estatus</p>
+            <h3 [class.text-success]="alumno.estatus === 'Activo'" [class.text-warning]="alumno.estatus === 'Baja'">{{ alumno.estatus || 'Activo' }}</h3>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+  <div *ngIf="!alumno" class="ion-padding ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Cargando detalles del alumno...</p>
+  </div>
+
+</ion-content>

@@ -1,0 +1,44 @@
+[
+  {
+    "claseId": 1,
+    "nombreClase": "Matemáticas Avanzadas",
+    "alumnos": [
+      {
+        "id": 101,
+        "nombre": "Juan",
+        "apellidos": "Pérez",
+        "email": "juan@aqadem.com"
+      },
+      {
+        "id": 102,
+        "nombre": "María",
+        "apellidos": "Gómez",
+        "email": "maria@aqadem.com"
+      }
+    ]
+  },
+  {
+    "claseId": 2,
+    "nombreClase": "Física Moderna",
+    "alumnos": [
+      {
+        "id": 201,
+        "nombre": "Luis",
+        "apellidos": "Martínez",
+        "email": "luis@aqadem.com"
+      },
+      {
+        "id": 202,
+        "nombre": "Ana",
+        "apellidos": "Sánchez",
+        "email": "ana@aqadem.com"
+      },
+      {
+        "id": 203,
+        "nombre": "David",
+        "apellidos": "Ruiz",
+        "email": "david@aqadem.com"
+      }
+    ]
+  }
+]

@@ -13,10 +13,9 @@ export class ClasesPage {
   filteredClases: any[] = [];
 
   clases = [
-    { nombre: "Matemáticas", horario: "Lunes 10:00", salon: "A1", alumnos: 20, icon: "calculator-outline" },
-    { nombre: "Historia", horario: "Martes 11:00", salon: "B2", alumnos: 15, icon: "book-outline" },
-    { nombre: "Física", horario: "Miércoles 12:00", salon: "C3", alumnos: 18, icon: "flask-outline" },
-    { nombre: "Física", horario: "Miércoles 12:00", salon: "C3", alumnos: 18, icon: "flask-outline" }
+    { id: 1, nombre: "Matemáticas", horario: "Lunes 10:00", salon: "A1", alumnos: 20, icon: "calculator-outline" },
+    { id: 2, nombre: "Historia", horario: "Martes 11:00", salon: "B2", alumnos: 15, icon: "book-outline" },
+    { id: 3, nombre: "Física", horario: "Miércoles 12:00", salon: "C3", alumnos: 18, icon: "flask-outline" },
   ];
 
   constructor(private router: Router) {
@@ -53,8 +52,6 @@ export class ClasesPage {
   }
 
   verDetalles(clase: any) {
-    this.router.navigate(["/clase-detalle"], {
-      queryParams: { nombre: clase.nombre },
-    });
+    this.router.navigate(["/clase-detalle", clase.id]);
   }
 }

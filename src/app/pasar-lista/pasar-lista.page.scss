@@ -1,0 +1,29 @@
+ion-item {
+  /* Asegura que el item no restrinja el espacio */
+  --inner-padding-end: 0;
+}
+
+/* 🌟 SOLUCIÓN DEFINITIVA: Usar un selector más específico y forzar la dirección */
+ion-item ion-radio-group[slot="end"] {
+    // 1. Forzar la disposición flexible.
+    display: flex !important; 
+    
+    // 2. Forzar explícitamente la dirección horizontal. Esto es clave.
+    flex-direction: row !important; 
+    
+    // Espacio entre los radio buttons
+    gap: 15px; 
+    
+    // Asegura que los radios se alineen verticalmente en el centro
+    align-items: center; 
+
+    // Reduce un poco el padding si es necesario
+    padding-right: 15px; 
+}
+
+/* Opcional: Estilo para los radio buttons individuales */
+ion-radio {
+    --border-width: 2px;
+    --inner-border-width: 4px;
+    --size: 24px;
+}

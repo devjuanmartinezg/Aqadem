@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import("./tabs/tabs.module").then((m) => m.TabsPageModule),
   },
   {
-    path: "clase-detalle",
+    path: 'clase-detalle/:id',
     loadChildren: () => import("./clase-detalle/clase-detalle.module").then((m) => m.ClaseDetallePageModule),
   },
   {
@@ -26,7 +26,21 @@ const routes: Routes = [
   {
   path: 'mensajes-chat-perfil/:id',
   loadChildren: () => import('./mensajes-chat-perfil/mensajes-chat-perfil.module').then(m => m.MensajesChatPerfilPageModule)
-  }
+  },
+  {
+    path: 'alumno-detalle',
+    loadChildren: () => import('./alumno-detalle/alumno-detalle.module').then( m => m.AlumnoDetallePageModule)
+  },
+  {
+  path: 'alumno-detalle/:id', // 👈 ¡CLAVE! Debe aceptar el ID
+  loadChildren: () => import('./alumno-detalle/alumno-detalle.module').then( m => m.AlumnoDetallePageModule)
+  },
+  {
+  path: 'pasar-lista/:id', // 👈 Nueva ruta: /pasar-lista/ID
+  loadChildren: () => import('./pasar-lista/pasar-lista.module').then( m => m.PasarListaPageModule)
+  },
+
+
 ]
 
 @NgModule({
