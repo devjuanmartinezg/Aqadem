@@ -1,12 +1,12 @@
 <ion-header class="dashboard-header">
   <ion-toolbar class="header-toolbar">
 
-    <!-- Botón del menú lateral (abre el menú principal de navegación) -->
+    <!-- Botón del menú lateral -->
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     
-    <!-- Sección de bienvenida con el nombre del usuario -->
+    <!-- Bienvenida -->
     <div class="header-content">
       <div class="welcome-section">
         <span class="welcome-label">Bienvenido</span>
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <!-- Botón de notificaciones (pendiente conectar con backend o alertas reales) -->
+    <!-- Botón de notificaciones -->
     <ion-buttons slot="end">
       <ion-button>
         <ion-icon name="notifications" slot="icon-only"></ion-icon>
@@ -25,7 +25,7 @@
 
 <ion-content class="dashboard-content">
 
-  <!-- Título principal del dashboard -->
+  <!-- Título principal -->
   <div class="dashboard-title">
     <h1>Dashboard</h1>
   </div>
@@ -34,45 +34,38 @@
   <div class="section">
     <div class="section-header">
       <h2>Clases de hoy</h2>
-      <!-- Botón para ver el listado completo de clases -->
       <ion-button fill="clear" size="small" class="ver-todas-btn">Ver todas</ion-button>
     </div>
 
-    <!-- Tarjeta individual de clase -->
-    <div class="class-card">
-      <div class="class-icon-container">
-        <ion-icon name="calculator-outline" class="class-icon"></ion-icon>
+    <!-- Si hay clases -->
+    <ng-container *ngIf="clasesHoy.length > 0; else sinClases">
+      <div *ngFor="let clase of clasesHoy" class="class-card" (click)="verClase(clase.Nombre)">
+        <div class="class-icon-container">
+          <ion-icon name="book-outline" class="class-icon"></ion-icon>
+        </div>
+        <div class="class-info">
+          <h3>{{ clase.Nombre }}</h3>
+          <p>{{ clase.HoraInicio }} - {{ clase.HoraFin }}, Aula {{ clase.NombreAula }}</p>
+        </div>
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
       </div>
-      <div class="class-info" button (click)="verClase('Matemáticas - 3º A')">
-        <h3>Matemáticas</h3>
-        <p>09:00 - 10:00, Aula 101</p>
-      </div>
-      <!-- Flecha de navegación -->
-      <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
-    </div>
+    </ng-container>
 
-    <!-- Otra clase del día -->
-    <div class="class-card">
-      <div class="class-icon-container">
-        <ion-icon name="book-outline" class="class-icon"></ion-icon>
-      </div>
-      <div class="class-info" button (click)="verClase('Historia - 3º A')">
-        <h3>Historia</h3>
-        <p>11:00 - 12:00, Aula 203</p>
-      </div>
-      <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
-    </div>
+    <!-- Si no hay clases -->
+    <ng-template #sinClases>
+      <p style="color: #9ca3af; text-align: center; font-size: 14px; margin-top: 8px;">
+        No hay clases programadas para hoy.
+      </p>
+    </ng-template>
   </div>
 
   <!-- Sección: Mensajes pendientes -->
   <div class="section">
     <div class="section-header">
       <h2>Mensajes pendientes</h2>
-      <!-- Botón para acceder a la bandeja completa -->
       <ion-button fill="clear" size="small" class="ver-todas-btn">Ver todos</ion-button>
     </div>
 
-    <!-- Primer mensaje pendiente -->
     <div class="message-card">
       <ion-avatar class="message-avatar">
         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" />
@@ -81,11 +74,9 @@
         <h3>Padre de Ana Gómez</h3>
         <p>Consulta sobre las notas...</p>
       </div>
-      <!-- Flecha indicando que se puede abrir -->
       <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
     </div>
 
-    <!-- Segundo mensaje pendiente -->
     <div class="message-card">
       <ion-avatar class="message-avatar">
         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar" />
@@ -98,30 +89,6 @@
     </div>
   </div>
 
-  <!-- 
-  =====================================
-  SECCIÓN: ACCIONES RÁPIDAS (COMENTADA)
-  =====================================
-
-  <div class="section">
-    <h2>Acciones rápidas</h2> 
-
-    // Tarjeta de acción para registrar faltas 
-    <div class="quick-action-card">
-      <div class="action-text">
-        <h3>Registrar faltas de asistencia</h3>
-        <p>Selecciona la clase y registra las ausencias de los alumnos.</p>
-      </div>
-
-      // Botón principal para abrir la función de registro 
-      <ion-button expand="block" class="register-button" (click)="registrarFaltas()">
-        <ion-icon slot="start" name="person-add-outline"></ion-icon>
-        Registrar Faltas
-      </ion-button>
-    </div>
-  </div>
-  -->
-
-  <!-- Espaciado final para evitar que el contenido quede oculto tras la tab bar -->
+  <!-- Espaciado final -->
   <div class="bottom-spacing"></div>
 </ion-content>
