@@ -5,71 +5,71 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>{{ alumno?.nombre }} {{ alumno?.apellidos }}</ion-title>
+    <ion-title>Detalles del Alumno</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  
-  <div *ngIf="alumno" class="ion-padding">
-    
-    <div class="avatar-header ion-text-center">
-      <ion-icon name="person-circle" color="primary" class="main-avatar"></ion-icon>
-      <h2>{{ alumno.nombre }} {{ alumno.apellidos }}</h2>
-      <p class="matricula-id">ID de Matrícula: {{ alumno.id }}</p>
-      <ion-chip color="secondary">
-        <ion-label>Clase: {{ alumno.claseAsignada || 'No Asignada' }}</ion-label>
-      </ion-chip>
-    </div>
+<ion-content class="ion-padding">
 
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Contacto</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-icon slot="start" name="mail-outline" color="medium"></ion-icon>
-          <ion-label>
-            <p>Email</p>
-            <h3>{{ alumno.email }}</h3>
-          </ion-label>
-        </ion-item>
-
-        <ion-item lines="none">
-          <ion-icon slot="start" name="call-outline" color="medium"></ion-icon>
-          <ion-label>
-            <p>Teléfono</p>
-            <h3>{{ alumno.telefono || 'No disponible' }}</h3>
-          </ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-    
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Detalles Académicos</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-item lines="none">
-          <ion-label>
-            <p>Última Nota</p>
-            <h3>{{ alumno.ultimaNota || 'N/A' }}</h3>
-          </ion-label>
-        </ion-item>
-        <ion-item lines="none">
-          <ion-label>
-            <p>Estatus</p>
-            <h3 [class.text-success]="alumno.estatus === 'Activo'" [class.text-warning]="alumno.estatus === 'Baja'">{{ alumno.estatus || 'Activo' }}</h3>
-          </ion-label>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
-
-  </div>
-
-  <div *ngIf="!alumno" class="ion-padding ion-text-center">
+  <!-- 🔄 Cargando -->
+  <div *ngIf="!alumno" class="ion-text-center">
     <ion-spinner></ion-spinner>
     <p>Cargando detalles del alumno...</p>
+  </div>
+
+  <!-- ✅ Datos del alumno -->
+  <div *ngIf="alumno">
+
+    <!-- 👤 Foto y nombre -->
+    <div class="avatar-header ion-text-center">
+      <ion-avatar *ngIf="alumno.foto?.content">
+        <img [src]="'data:image/jpeg;base64,' + alumno.foto.content" alt="Foto de {{ alumno.RazonSocial }}">
+      </ion-avatar>
+      <ion-icon *ngIf="!alumno.foto?.content" name="person-circle" color="primary" class="main-avatar"></ion-icon>
+
+      <h2>{{ alumno.RazonSocial }} {{ alumno.NombreComercial }}</h2>
+      <p class="matricula-id">ID: {{ alumno.ID }}</p>
+    </div>
+
+    <!-- 📋 Información general -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información Personal</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon name="calendar-outline" slot="start" color="medium"></ion-icon>
+          <ion-label>
+            <p>Fecha de nacimiento</p>
+            <h3>{{ alumno.FechaNacimiento | date:'dd/MM/yyyy' }}</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="alumno.Poblacion">
+          <ion-icon name="location-outline" slot="start" color="medium"></ion-icon>
+          <ion-label>
+            <p>Ciudad</p>
+            <h3>{{ alumno.Poblacion }}</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="alumno.Hermanos">
+          <ion-icon name="people-outline" slot="start" color="medium"></ion-icon>
+          <ion-label>
+            <p>Hermanos</p>
+            <h3>{{ alumno.Hermanos }}</h3>
+          </ion-label>
+        </ion-item>
+
+        <ion-item lines="none" *ngIf="alumno.DTOPorcentaje">
+          <ion-icon name="ribbon-outline" slot="start" color="medium"></ion-icon>
+          <ion-label>
+            <p>Descuento aplicado</p>
+            <h3>{{ alumno.DTOPorcentaje }}%</h3>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
   </div>
 
 </ion-content>

@@ -1,83 +1,112 @@
 // src/app/services/data/data.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
-
-export interface Alumno {
-  id: number;
-  nombre: string;
-  apellidos: string;
-  email: string;
-}
-
-export interface Clase {
-  claseId: number;
-  nombreClase: string;
-  alumnos: Alumno[];
-}
+import { Observable, map, switchMap, of, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+export class DataService {
+  private readonly basePath = 'assets/data/';
 
-export class DataService { // Asegúrate que tu clase se llame DataService
+  constructor(private http: HttpClient) {}
 
-  // Ruta a tu archivo JSON
-  private readonly alumnosDataPath = 'assets/data/alumnos.json';
-
-  constructor(private http: HttpClient) { }
-
-  getClases(): Observable<Clase[]> {
-    return this.http.get<Clase[]>(this.alumnosDataPath);
+  /**
+   * 📘 Devuelve la lista de clases desde portada.json
+   */
+  getClases(): Observable<any[]> {
+    return this.http.get<any>(`${this.basePath}portada.json`).pipe(
+      map(res => res.data?.grupos || [])
+    );
   }
 
   /**
-   * Obtiene la lista de alumnos buscando en el JSON local por el ID de la clase.
+   * 📘 Devuelve el detalle de una clase específica (por código textual)
    */
-  getAlumnosByClaseId(claseId: number): Observable<any[]> {
-    return this.http.get<any[]>(this.alumnosDataPath).pipe(
-      map(clases => {
-        // Busca el objeto de clase que coincida con el 'claseId'
-        const claseEncontrada = clases.find(clase => clase.claseId === claseId);
-        
-        // Devuelve el array de alumnos, o un array vacío si no se encuentra
-        return claseEncontrada ? claseEncontrada.alumnos : [];
+  getClaseDetalle(codigoClase: string): Observable<any[]> {
+    if (!codigoClase) {
+      console.warn('⚠️ getClaseDetalle llamado sin código de clase');
+      return of([]);
+    }
+
+    const codigoNormalizado = codigoClase.replace(/\s+/g, '').toUpperCase();
+    const fileName = `${this.basePath}alumnos-grupo-${codigoNormalizado}.json`;
+
+    console.log('📘 Cargando alumnos desde:', fileName);
+
+    return this.http.get<any>(fileName).pipe(
+      map(res => res.data || []), // 👈 aquí extraemos el array real
+      catchError(err => {
+        console.error('❌ Error al cargar alumnos para', codigoNormalizado, err);
+        return of([]);
       })
     );
   }
 
+
+  /**
+   * 👩‍🏫 Devuelve los alumnos pertenecientes a una clase (por su código textual)
+   */
+  getAlumnosByClaseId(codigoClase: string): Observable<any[]> {
+    if (!codigoClase) {
+      console.warn('⚠️ getAlumnosByClaseId llamado sin código de clase');
+      return of([]);
+    }
+
+    const codigoNormalizado = codigoClase.replace(/\s+/g, '').toUpperCase();
+    const fileName = `${this.basePath}alumnos-grupo-${codigoNormalizado}.json`;
+
+    console.log('📘 Cargando alumnos desde:', fileName);
+
+    return this.http.get<any[]>(fileName).pipe(
+      catchError((err: any) => {
+        console.error('❌ Error al cargar alumnos para', codigoNormalizado, err);
+        return of([]);
+      })
+    );
+  }
+
+  /**
+   * 👤 Devuelve un alumno específico por su ID (buscando en todos los grupos)
+   */
   getAlumnoById(alumnoId: number): Observable<any | null> {
-        // La ruta a tu JSON (ajusta si es necesario)
-        return this.http.get<any[]>(this.alumnosDataPath).pipe(
-            map(clases => {
-                // Recorrer todas las clases para encontrar al alumno
-                for (const clase of clases) {
-                    // Usamos 'any' en el find si no tenemos tipado fuerte, o tipamos con 'alumno'
-                    const alumnoEncontrado = clase.alumnos.find((a: any) => a.id === alumnoId); 
-                    if (alumnoEncontrado) {
-                        return alumnoEncontrado;
-                    }
-                }
-                // Si el alumno no se encuentra en ninguna clase
-                return null;
-            })
-        );
-  }
+    return this.http.get<any>(`${this.basePath}portada.json`).pipe(
+      switchMap(res => {
+        const grupos = res.data.grupos;
+        const observables = grupos.map((grupo: any) => {
+          const codigo = grupo.Codigo.replace(/\s+/g, '').toUpperCase();
+          const fileName = `${this.basePath}alumnos-grupo-${codigo}.json`;
 
-  getClaseDetalle(claseId: number): Observable<any | null> {
-    // La ruta a tu JSON (ajusta si es necesario)
-    const alumnosDataPath = 'assets/data/alumnos.json'; 
-    
-    // Carga todo el JSON
-    return this.http.get<any[]>(alumnosDataPath).pipe(
-      map(clases => {
-        // Busca el objeto de clase completo que coincida con el ID
-        const claseEncontrada = clases.find(clase => clase.claseId === claseId);
-        
-        // Devuelve el objeto completo de la clase o null
-        return claseEncontrada || null;
+          return this.http.get<any>(fileName).pipe(
+            map(fileData => {
+              const alumnos = fileData.data || [];
+              return alumnos.find((a: any) => +a.ID === alumnoId) || null;
+            }),
+            catchError(() => of(null))
+          );
+        });
+
+        // Buscar en el primer grupo que lo contenga
+        return new Observable<any | null>(subscriber => {
+          let encontrado: any = null;
+          let pendientes = observables.length;
+
+          observables.forEach((obs: Observable<any | null>) => {
+            obs.subscribe(result => {
+              if (result && !encontrado) {
+                encontrado = result;
+                subscriber.next(encontrado);
+                subscriber.complete();
+              }
+              if (--pendientes === 0 && !encontrado) {
+                subscriber.next(null);
+                subscriber.complete();
+              }
+            });
+          });
+        });
       })
     );
   }
+
 }

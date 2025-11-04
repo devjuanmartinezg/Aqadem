@@ -1,0 +1,374 @@
+{
+  "data": {
+    "grupos": [
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "JUNIOR",
+        "CodigoTitulacionNivel": "JUNIOR2",
+        "CodigoTitulacionNivelUnidad": "JUNIOR2",
+        "Codigo": "JUNIOR 2A",
+        "Nombre": "JUNIOR 2A",
+        "Descripcion": "STEPS 3",
+        "FechaInicio": "2025-09-15 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNIJUNIOR",
+        "NumeroMaximo": "10",
+        "AlumnosGrupo": "3",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "7",
+        "horarios": [
+          {
+            "DiaSemana": "1",
+            "HoraInicio": "19:15:00.0000000",
+            "HoraFin": "20:15:00.0000000",
+            "NombreAula": "blue room"
+          },
+          {
+            "DiaSemana": "3",
+            "HoraInicio": "19:15:00.0000000",
+            "HoraFin": "20:15:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "JUNIOR",
+        "CodigoTitulacionNivel": "JUNIOR4",
+        "CodigoTitulacionNivelUnidad": "JUNIOR4",
+        "Codigo": "JUNIOR 4A",
+        "Nombre": "JUNIOR 4A",
+        "Descripcion": "STEPS 5",
+        "FechaInicio": "2025-09-15 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNIJUNIOR",
+        "NumeroMaximo": "10",
+        "AlumnosGrupo": "3",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "7",
+        "horarios": [
+          {
+            "DiaSemana": "1",
+            "HoraInicio": "16:00:00.0000000",
+            "HoraFin": "17:00:00.0000000",
+            "NombreAula": "PURPLE ROOM"
+          },
+          {
+            "DiaSemana": "3",
+            "HoraInicio": "16:00:00.0000000",
+            "HoraFin": "17:00:00.0000000",
+            "NombreAula": "PURPLE ROOM"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "JUNIOR",
+        "CodigoTitulacionNivel": "JUNIOR4",
+        "CodigoTitulacionNivelUnidad": "JUNIOR4",
+        "Codigo": "JUNIOR 4B",
+        "Nombre": "JUNIOR 4B",
+        "Descripcion": "STEPS 5",
+        "FechaInicio": "2025-09-16 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNIJUNIOR",
+        "NumeroMaximo": "12",
+        "AlumnosGrupo": "8",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "4",
+        "horarios": [
+          {
+            "DiaSemana": "2",
+            "HoraInicio": "18:00:00.0000000",
+            "HoraFin": "19:00:00.0000000",
+            "NombreAula": "blue room"
+          },
+          {
+            "DiaSemana": "4",
+            "HoraInicio": "18:00:00.0000000",
+            "HoraFin": "19:00:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "JUNIOR",
+        "CodigoTitulacionNivel": "JUNIOR5",
+        "CodigoTitulacionNivelUnidad": "JUNIOR5",
+        "Codigo": "JUNIOR 5A",
+        "Nombre": "JUNIOR 5A",
+        "Descripcion": "STEPS 6",
+        "FechaInicio": "2025-09-16 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNIJUNIOR",
+        "NumeroMaximo": "12",
+        "AlumnosGrupo": "7",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "5",
+        "horarios": [
+          {
+            "DiaSemana": "1",
+            "HoraInicio": "18:00:00.0000000",
+            "HoraFin": "19:00:00.0000000",
+            "NombreAula": "blue room"
+          },
+          {
+            "DiaSemana": "3",
+            "HoraInicio": "18:00:00.0000000",
+            "HoraFin": "19:00:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "KIDS",
+        "CodigoTitulacionNivel": "KIDS1",
+        "CodigoTitulacionNivelUnidad": "KIDS1",
+        "Codigo": "KIDS1",
+        "Nombre": "KIDS 1",
+        "Descripcion": "BIG WHEEL STARTER",
+        "FechaInicio": "2025-09-15 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "GENERAL2HORAS",
+        "NumeroMaximo": "12",
+        "AlumnosGrupo": "4",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "8",
+        "horarios": [
+          {
+            "DiaSemana": "2",
+            "HoraInicio": "16:00:00.0000000",
+            "HoraFin": "17:00:00.0000000",
+            "NombreAula": "blue room"
+          },
+          {
+            "DiaSemana": "4",
+            "HoraInicio": "16:00:00.0000000",
+            "HoraFin": "17:00:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "PRIVATE",
+        "CodigoTitulacionNivel": "PRIVATE1H",
+        "CodigoTitulacionNivelUnidad": "PRIVATE1H",
+        "Codigo": "P.C IRENE",
+        "Nombre": "PRIVATE CLASS IRENE",
+        "Descripcion": "PRIVATE CLASS IRENE",
+        "FechaInicio": "2025-09-16 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNIPRIVATE1H",
+        "NumeroMaximo": "1",
+        "AlumnosGrupo": "1",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "0",
+        "horarios": [
+          {
+            "DiaSemana": "2",
+            "HoraInicio": "20:15:00.0000000",
+            "HoraFin": "21:15:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "SENIOR",
+        "CodigoTitulacionNivel": "SENIOR3",
+        "CodigoTitulacionNivelUnidad": "SENIOR3",
+        "Codigo": "SENIOR 3B",
+        "Nombre": "SENIOR 3B",
+        "Descripcion": "GOLD A2.2",
+        "FechaInicio": "2025-09-16 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNISENIOR",
+        "NumeroMaximo": "10",
+        "AlumnosGrupo": "4",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "6",
+        "horarios": [
+          {
+            "DiaSemana": "1",
+            "HoraInicio": "20:15:00.0000000",
+            "HoraFin": "21:15:00.0000000",
+            "NombreAula": "blue room"
+          },
+          {
+            "DiaSemana": "3",
+            "HoraInicio": "20:15:00.0000000",
+            "HoraFin": "21:15:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "SENIOR",
+        "CodigoTitulacionNivel": "SENIOR3",
+        "CodigoTitulacionNivelUnidad": "SENIOR3",
+        "Codigo": "SENIOR 3C",
+        "Nombre": "SENIOR 3C",
+        "Descripcion": "GOLD A2.2",
+        "FechaInicio": "2025-09-16 00:00:00",
+        "FechaFin": "2026-06-30 00:00:00",
+        "IDArticulo": "CUNISENIOR",
+        "NumeroMaximo": "12",
+        "AlumnosGrupo": "7",
+        "NumeroReservas": "0",
+        "PlazasDisponibles": "5",
+        "horarios": [
+          {
+            "DiaSemana": "2",
+            "HoraInicio": "19:15:00.0000000",
+            "HoraFin": "20:15:00.0000000",
+            "NombreAula": "blue room"
+          },
+          {
+            "DiaSemana": "4",
+            "HoraInicio": "19:15:00.0000000",
+            "HoraFin": "20:15:00.0000000",
+            "NombreAula": "blue room"
+          }
+        ]
+      }
+    ],
+    "eventos": [
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "JUNIOR",
+        "CodigoTitulacionNivel": "JUNIOR4",
+        "CodigoTitulacionNivelUnidad": "JUNIOR4",
+        "CodigoAlumnosGrupo": "JUNIOR 4B",
+        "FechaInicio": "2025-09-15 00:00:00.000",
+        "FechaFin": "2026-06-30 00:00:00.000",
+        "HoraInicio": "18:00",
+        "HoraFin": "19:00",
+        "IDAcreedor": "24",
+        "DiaSemana": "2",
+        "Fecha": "2025-11-04 00:00:00.000",
+        "CodigoEventoTipo": "1",
+        "IDDelegacionAula": "34",
+        "Nombre": "JUNIOR 4B",
+        "Descripcion": "STEPS 5",
+        "NumeroMaximo": "12",
+        "NombreAula": "blue room",
+        "Color": null,
+        "TipoEvento": null,
+        "Duracion": 60
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "KIDS",
+        "CodigoTitulacionNivel": "KIDS1",
+        "CodigoTitulacionNivelUnidad": "KIDS1",
+        "CodigoAlumnosGrupo": "KIDS1",
+        "FechaInicio": "2025-09-15 00:00:00.000",
+        "FechaFin": "2026-06-30 00:00:00.000",
+        "HoraInicio": "16:00",
+        "HoraFin": "17:00",
+        "IDAcreedor": "24",
+        "DiaSemana": "2",
+        "Fecha": "2025-11-04 00:00:00.000",
+        "CodigoEventoTipo": "1",
+        "IDDelegacionAula": "34",
+        "Nombre": "KIDS 1",
+        "Descripcion": "BIG WHEEL STARTER",
+        "NumeroMaximo": "12",
+        "NombreAula": "blue room",
+        "Color": null,
+        "TipoEvento": null,
+        "Duracion": 60
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "PRIVATE",
+        "CodigoTitulacionNivel": "PRIVATE1H",
+        "CodigoTitulacionNivelUnidad": "PRIVATE1H",
+        "CodigoAlumnosGrupo": "P.C IRENE",
+        "FechaInicio": "2025-09-16 00:00:00.000",
+        "FechaFin": "2026-06-30 00:00:00.000",
+        "HoraInicio": "20:15",
+        "HoraFin": "21:15",
+        "IDAcreedor": "24",
+        "DiaSemana": "2",
+        "Fecha": "2025-11-04 00:00:00.000",
+        "CodigoEventoTipo": "1",
+        "IDDelegacionAula": "34",
+        "Nombre": "PRIVATE CLASS IRENE",
+        "Descripcion": "PRIVATE CLASS IRENE",
+        "NumeroMaximo": "1",
+        "NombreAula": "blue room",
+        "Color": null,
+        "TipoEvento": null,
+        "Duracion": 60
+      },
+      {
+        "IDEmpresa": "1",
+        "IDDelegacion": "1",
+        "IDCursoAcademico": "6",
+        "IDEscuela": "3",
+        "CodigoTitulacion": "SENIOR",
+        "CodigoTitulacionNivel": "SENIOR3",
+        "CodigoTitulacionNivelUnidad": "SENIOR3",
+        "CodigoAlumnosGrupo": "SENIOR 3C",
+        "FechaInicio": "2025-09-16 00:00:00.000",
+        "FechaFin": "2026-06-30 00:00:00.000",
+        "HoraInicio": "19:15",
+        "HoraFin": "20:15",
+        "IDAcreedor": "24",
+        "DiaSemana": "2",
+        "Fecha": "2025-11-04 00:00:00.000",
+        "CodigoEventoTipo": "1",
+        "IDDelegacionAula": "34",
+        "Nombre": "SENIOR 3C",
+        "Descripcion": "GOLD A2.2",
+        "NumeroMaximo": "12",
+        "NombreAula": "blue room",
+        "Color": null,
+        "TipoEvento": null,
+        "Duracion": 60
+      }
+    ],
+    "totalAlumnos": "73"
+  },
+  "success": true,
+  "code": 200,
+  "messages": []
+}

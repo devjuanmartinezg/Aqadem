@@ -16,25 +16,37 @@
 
 <ion-content class="ion-padding">
   
+  <!-- Mensaje si no hay alumnos -->
   <div *ngIf="alumnos.length === 0">
     <p>Cargando alumnos o no hay alumnos matriculados en esta clase.</p>
   </div>
   
+  <!-- Lista de alumnos -->
   <ion-list *ngIf="alumnos.length > 0">
     
     <ion-item button *ngFor="let alumno of alumnos" (click)="verDetallesAlumno(alumno)">
       
+      <!-- Foto del alumno si existe -->
+      <ion-avatar slot="start" *ngIf="alumno.foto?.content">
+        <img [src]="'data:image/jpeg;base64,' + alumno.foto.content" alt="Foto de {{ alumno.RazonSocial }}">
+      </ion-avatar>
+
+      <!-- Icono por defecto si no hay foto -->
       <ion-icon 
+        *ngIf="!alumno.foto?.content"
         slot="start" 
         name="person-circle-outline" 
         color="primary" 
-        class="user-icon-size"
-      ></ion-icon>
+        class="user-icon-size">
+      </ion-icon>
       
       <ion-label>
-        <h3>{{ alumno.nombre }} {{ alumno.apellidos }}</h3>
-        <p>ID: {{ alumno.id }}</p>
-        <p>Email: {{ alumno.email }}</p>
+        <h3>{{ alumno.RazonSocial }} {{ alumno.NombreComercial }}</h3>
+        <p>ID: {{ alumno.ID }}</p>
+        <p *ngIf="alumno.FechaNacimiento">
+          Fecha de nacimiento: {{ alumno.FechaNacimiento | date:'dd/MM/yyyy' }}
+        </p>
+        <p *ngIf="alumno.Poblacion">Ciudad: {{ alumno.Poblacion }}</p>
       </ion-label>
       
     </ion-item>
@@ -44,15 +56,15 @@
 </ion-content>
   
 <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab-button color="primary">
+    <ion-icon name="chevron-up-circle"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top">
     <ion-fab-button color="primary">
-      <ion-icon name="chevron-up-circle"></ion-icon>
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button color="primary">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button color="primary" (click)="irATomarAsistencia()">
-        <ion-icon name="checkmark"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
+    <ion-fab-button color="primary" (click)="irATomarAsistencia()">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
 </ion-fab>

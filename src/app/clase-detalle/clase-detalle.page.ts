@@ -11,10 +11,10 @@ import { Router } from "@angular/router"
   standalone: false,
 })
 export default class ClaseDetallePage implements OnInit {
-  claseNombre = "Biología y Geología - 3º B";
+  claseNombre = "";
   
 
-  claseId: number = 0;
+  claseId: string = "";
   alumnos: any[] = [];
   
   constructor(
@@ -25,15 +25,34 @@ export default class ClaseDetallePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Suscribirse a los parámetros de la URL para obtener el ID
     this.activatedRoute.paramMap.subscribe(params => {
-      const idParam = params.get('id'); 
+      const idParam = params.get('id');
       if (idParam) {
-        this.claseId = +idParam; // Convertir a número
-        this.cargarAlumnos(); 
+        // Ya no es numérico, puede ser texto
+        this.claseId = decodeURIComponent(idParam);
+        console.log('📘 Cargando clase con código:', this.claseId);
+
+        this.cargarAlumnos();
+        this.dataService.getClaseDetalle(this.claseId).subscribe({
+          next: (alumnos) => {
+            if (alumnos && alumnos.length > 0) {
+              this.alumnos = alumnos;
+              // Usa el código de clase como nombre de cabecera
+              this.claseNombre = this.claseId;
+            } else {
+              this.claseNombre = this.claseId + ' (Sin alumnos)';
+              this.alumnos = [];
+            }
+          },
+          error: (err) => {
+            console.error('❌ Error al cargar alumnos:', err);
+            this.claseNombre = this.claseId + ' (Error)';
+          }
+        });
       }
     });
   }
+
 
   cargarAlumnos() {
     // Llamar al método del DataService
@@ -51,10 +70,15 @@ export default class ClaseDetallePage implements OnInit {
   }
 
   verDetallesAlumno(alumno: any) {
-    // 🌟 Implementación de la navegación por ID
-    console.log('Navegando a detalles del alumno con ID:', alumno.id);
-    this.router.navigate(['/alumno-detalle', alumno.id]);
+    const alumnoId = alumno.ID || alumno.id; // acepta ambas variantes
+    if (alumnoId) {
+      console.log('Navegando a detalles del alumno con ID:', alumnoId);
+      this.router.navigate(['/alumno-detalle', alumnoId]);
+    } else {
+      console.warn('⚠️ No se encontró ID en el alumno:', alumno);
+    }
   }
+
 
   irATomarAsistencia() {
     if (this.claseId) {

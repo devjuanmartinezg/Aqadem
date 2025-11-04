@@ -1,43 +1,105 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { DataService } from "../services/data/data.service";
 
 @Component({
   selector: "app-clases",
   templateUrl: "./clases.page.html",
   styleUrls: ["./clases.page.scss"],
-  standalone:false,
+  standalone: false,
 })
-export class ClasesPage {
+export class ClasesPage implements OnInit {
   showSearch = false;
   searchText = "";
-  filteredClases: any[] = [];
+  grupos: any[] = [];
+  filteredClases: any[] = []; // ✅ esta propiedad debe existir
+  loading = true;
 
-  clases = [
-    { id: 1, nombre: "Matemáticas", horario: "Lunes 10:00", salon: "A1", alumnos: 20, icon: "calculator-outline" },
-    { id: 2, nombre: "Historia", horario: "Martes 11:00", salon: "B2", alumnos: 15, icon: "book-outline" },
-    { id: 3, nombre: "Física", horario: "Miércoles 12:00", salon: "C3", alumnos: 18, icon: "flask-outline" },
-  ];
+  constructor(private router: Router, private dataService: DataService) {}
 
-  constructor(private router: Router) {
-    this.filteredClases = this.clases;
+  ngOnInit() {
+    this.cargarGrupos();
   }
 
+  cargarGrupos() {
+    this.dataService.getClases().subscribe({
+      next: (grupos) => {
+        this.grupos = grupos;
+        this.filteredClases = grupos.map((g) => ({
+          id: g.Codigo,
+          nombre: g.Nombre,
+          horario: this.formatearHorarios(g.horarios),
+          salon: g.horarios?.[0]?.NombreAula || "Aula sin asignar",
+          alumnos: g.AlumnosGrupo || 0,
+          icon: "book-outline",
+        }));
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error("Error al cargar clases:", err);
+        this.loading = false;
+      },
+    });
+  }
+
+  // 🔍 Buscador
   toggleSearch() {
     this.showSearch = !this.showSearch;
     if (!this.showSearch) this.onClear();
-    console.log("Lupa clicada 🕵️‍♀️");
   }
 
   filterClases() {
     const text = this.searchText.toLowerCase();
-    this.filteredClases = this.clases.filter((c) => c.nombre.toLowerCase().includes(text));
+    this.filteredClases = this.grupos
+      .map((g) => ({
+        id: g.Codigo,
+        nombre: g.Nombre,
+        horario: this.formatearHorarios(g.horarios),
+        salon: g.horarios?.[0]?.NombreAula || "Aula sin asignar",
+        alumnos: g.AlumnosGrupo || 0,
+        icon: "book-outline",
+      }))
+      .filter((c) => c.nombre.toLowerCase().includes(text));
   }
 
   onClear() {
     this.searchText = "";
-    this.filteredClases = this.clases;
+    this.filteredClases = this.grupos.map((g) => ({
+      id: g.Codigo,
+      nombre: g.Nombre,
+      horario: this.formatearHorarios(g.horarios),
+      salon: g.horarios?.[0]?.NombreAula || "Aula sin asignar",
+      alumnos: g.AlumnosGrupo || 0,
+      icon: "book-outline",
+    }));
   }
 
+  // 🕒 Convierte horarios en texto legible
+  formatearHorarios(horarios: any[]): string {
+    if (!horarios || horarios.length === 0) return "Sin horario";
+    return horarios
+      .map(
+        (h) =>
+          `${this.diaSemana(h.DiaSemana)} ${h.HoraInicio?.slice(0, 5) || ""}`
+      )
+      .join(", ");
+  }
+
+  diaSemana(num: string): string {
+    const dias = [
+      "Lunes",
+      "Martes",
+      "Miércoles",
+      "Jueves",
+      "Viernes",
+      "Sábado",
+      "Domingo",
+    ];
+    const index = parseInt(num, 10) - 1;
+    return dias[index] || "";
+  }
+
+  // 🎨 Color del icono/avatar
   getAvatarClass(icon: string) {
     switch (icon) {
       case "calculator-outline":
@@ -45,13 +107,21 @@ export class ClasesPage {
       case "book-outline":
         return "bg-green";
       case "flask-outline":
-        return "bg-red";
+        return "bg-orange";
       default:
         return "bg-default";
     }
   }
 
+  // 🚀 Navegar al detalle (usa índice del grupo)
   verDetalles(clase: any) {
-    this.router.navigate(["/clase-detalle", clase.id]);
+  const id = clase.id || clase.nombre || clase.Codigo; // acepta cualquier formato
+  if (id) {
+    console.log('📘 Navegando a clase-detalle con ID/Codigo:', id);
+    this.router.navigate(['/clase-detalle', encodeURIComponent(id)]);
+  } else {
+    console.warn('⚠️ Clase sin ID ni nombre:', clase);
   }
+}
+
 }

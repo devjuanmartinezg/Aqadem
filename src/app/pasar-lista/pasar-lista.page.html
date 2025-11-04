@@ -5,28 +5,52 @@
         <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title>Pasar Lista - Clase ID: {{ claseId }}</ion-title>
+    <ion-title>Pasar Lista - {{ claseCodigo }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
+<ion-content class="ion-padding">
+
+  <div *ngIf="alumnosAsistencia.length === 0" class="ion-text-center">
+    <ion-spinner></ion-spinner>
+    <p>Cargando alumnos...</p>
+  </div>
+
+  <ion-list *ngIf="alumnosAsistencia.length > 0">
     <ion-item *ngFor="let alumno of alumnosAsistencia">
       
+      <!-- 🧑‍🎓 Avatar -->
+      <ion-avatar slot="start" *ngIf="alumno.foto?.content">
+        <img [src]="'data:image/jpeg;base64,' + alumno.foto.content" alt="Foto de {{ alumno.RazonSocial }}">
+      </ion-avatar>
+
+      <ion-icon
+        *ngIf="!alumno.foto?.content"
+        slot="start"
+        name="person-circle-outline"
+        color="primary"
+        class="user-icon-size">
+      </ion-icon>
+
+      <!-- 📝 Datos del alumno -->
       <ion-label>
-        <h3>{{ alumno.nombre }} {{ alumno.apellidos }}</h3>
+        <h3>{{ alumno.RazonSocial }} {{ alumno.NombreComercial }}</h3>
+        <p>ID: {{ alumno.ID }}</p>
       </ion-label>
-      
-      <ion-radio-group 
-        slot="end" 
-        [(ngModel)]="alumno.asistencia" 
-        [name]="'asistencia-' + alumno.id"
-        class="horizontal-radio-group"  >
-        <ion-radio value="P" color="success" title="Presente"></ion-radio>
-        <ion-radio value="A" color="danger" title="Ausente"></ion-radio>
-        <ion-radio value="J" color="warning" title="Justificada"></ion-radio>
-      </ion-radio-group>
-      
+
+      <!-- 🎯 Controles de asistencia -->
+      <ion-segment [(ngModel)]="alumno.asistencia" class="asistencia-segment">
+        <ion-segment-button value="P" title="Presente">
+          <ion-icon name="checkmark-circle"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="A" title="Ausente">
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="J" title="Justificada">
+          <ion-icon name="alert-circle"></ion-icon>
+        </ion-segment-button>
+      </ion-segment>
+
     </ion-item>
   </ion-list>
 </ion-content>
