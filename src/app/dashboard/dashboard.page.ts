@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { AlertController } from "@ionic/angular";
 import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-dashboard",
@@ -9,63 +10,47 @@ import { Router } from "@angular/router";
   standalone: false,
 })
 export class DashboardPage implements OnInit {
-  // 🔹 Añadimos esta propiedad para que el HTML pueda acceder a ella
   clasesHoy: any[] = [];
+  totalAlumnos: number = 0;
 
   constructor(
     private alertCtrl: AlertController,
     private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
-    const data = {
-      data: {
-        eventos: [
-          {
-            Nombre: "JUNIOR 4B",
-            Descripcion: "STEPS 5",
-            HoraInicio: "18:00",
-            HoraFin: "19:00",
-            NombreAula: "blue room",
-            DiaSemana: "2",
-          },
-          {
-            Nombre: "KIDS 1",
-            Descripcion: "BIG WHEEL STARTER",
-            HoraInicio: "16:00",
-            HoraFin: "17:00",
-            NombreAula: "blue room",
-            DiaSemana: "2",
-          },
-          {
-            Nombre: "PRIVATE CLASS IRENE",
-            Descripcion: "PRIVATE CLASS IRENE",
-            HoraInicio: "20:15",
-            HoraFin: "21:15",
-            NombreAula: "blue room",
-            DiaSemana: "2",
-          },
-          {
-            Nombre: "SENIOR 3C",
-            Descripcion: "GOLD A2.2",
-            HoraInicio: "19:15",
-            HoraFin: "20:15",
-            NombreAula: "blue room",
-            DiaSemana: "2",
-          },
-        ],
-      },
-    };
-
-    this.cargarClasesDelDia(data);
+    this.cargarDatos();
   }
 
-  // 🔹 Nuevo método para filtrar las clases del día actual
-  cargarClasesDelDia(data: any) {
-    const hoy = new Date().getDay(); // 0 = domingo, 1 = lunes, 2 = martes...
-    this.clasesHoy = data.data.eventos.filter(
-      (evento: any) => Number(evento.DiaSemana) === hoy
-    );
+  /**
+   * Carga los datos desde la API y filtra las clases del día actual
+   */
+  cargarDatos() {
+    // 👉 Sustituye esta URL por tu endpoint real o servicio
+    this.http.get("assets/data/portada.json").subscribe({
+      next: (response: any) => {
+        if (response?.data) {
+          const data = response.data;
+
+          // Guardamos total de alumnos
+          this.totalAlumnos = Number(data.totalAlumnos || 0);
+
+          // ✅ Tomamos las clases directamente de los eventos del día
+          this.clasesHoy = data.eventos.map((evento: any) => ({
+            Nombre: evento.Nombre,
+            Descripcion: evento.Descripcion,
+            HoraInicio: evento.HoraInicio,
+            HoraFin: evento.HoraFin,
+            NombreAula: evento.NombreAula,
+            DiaSemana: evento.DiaSemana,
+          }));
+        }
+      },
+      error: (err) => {
+        console.error("Error cargando datos del dashboard:", err);
+      },
+    });
   }
 
   async registrarFaltas() {
