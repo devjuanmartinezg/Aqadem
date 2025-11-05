@@ -23,11 +23,8 @@ export class DashboardPage implements OnInit {
     this.cargarDatos();
   }
 
-  /**
-   * Carga los datos desde la API y filtra las clases del día actual
-   */
+
   cargarDatos() {
-    // 👉 Sustituye esta URL por tu endpoint real o servicio
     this.http.get("assets/data/portada.json").subscribe({
       next: (response: any) => {
         if (response?.data) {
@@ -36,7 +33,7 @@ export class DashboardPage implements OnInit {
           // Guardamos total de alumnos
           this.totalAlumnos = Number(data.totalAlumnos || 0);
 
-          // ✅ Tomamos las clases directamente de los eventos del día
+          // Tomamos las clases directamente de los eventos del día
           this.clasesHoy = data.eventos.map((evento: any) => ({
             Nombre: evento.Nombre,
             Descripcion: evento.Descripcion,
@@ -62,13 +59,18 @@ export class DashboardPage implements OnInit {
     await alert.present();
   }
 
-  testClick() {
-    alert("Test click funciona");
+  verClase(nombreClase: string) {
+    this.router.navigate(["/clase-detalle", encodeURIComponent(nombreClase)]);
   }
 
-  verClase(nombreClase: string) {
-    this.router.navigate(["/clase-detalle"], {
-      queryParams: { nombre: nombreClase },
-    });
+  verTodasClases() {
+    this.router.navigate(["/tabs/clases"]);
   }
+
+  verTodosMensajes() {
+    this.router.navigate(['/tabs/mensajes']);
+  }
+
+
+
 }

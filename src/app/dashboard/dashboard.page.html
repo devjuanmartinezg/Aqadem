@@ -34,7 +34,9 @@
   <div class="section">
     <div class="section-header">
       <h2>Clases de hoy</h2>
-      <ion-button fill="clear" size="small" class="ver-todas-btn">Ver todas</ion-button>
+      <ion-button fill="clear" size="small" class="ver-todas-btn" (click)="verTodasClases()">
+        Ver todas
+    </ion-button>
     </div>
 
     <!-- Si hay clases -->
@@ -63,7 +65,9 @@
   <div class="section">
     <div class="section-header">
       <h2>Mensajes pendientes</h2>
-      <ion-button fill="clear" size="small" class="ver-todas-btn">Ver todos</ion-button>
+      <ion-button fill="clear" size="small" class="ver-todas-btn" (click)="verTodosMensajes()">
+        Ver todos
+    </ion-button>
     </div>
 
     <div class="message-card">

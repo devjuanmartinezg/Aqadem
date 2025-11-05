@@ -32,11 +32,11 @@ const routes: Routes = [
     loadChildren: () => import('./alumno-detalle/alumno-detalle.module').then( m => m.AlumnoDetallePageModule)
   },
   {
-    path: 'alumno-detalle/:id', // 👈 ¡CLAVE! Debe aceptar el ID
+    path: 'alumno-detalle/:id',
     loadChildren: () => import('./alumno-detalle/alumno-detalle.module').then( m => m.AlumnoDetallePageModule)
   },
   {
-    path: 'pasar-lista/:id', // 👈 Nueva ruta: /pasar-lista/ID
+    path: 'pasar-lista/:id',
     loadChildren: () => import('./pasar-lista/pasar-lista.module').then( m => m.PasarListaPageModule)
   },
 
