@@ -25,10 +25,10 @@ export class PasarListaPage implements OnInit {
       const idParam = params.get('id');
       if (idParam) {
         this.claseCodigo = decodeURIComponent(idParam);
-        console.log('📘 Cargando asistencia para clase:', this.claseCodigo);
+        console.log('Cargando asistencia para clase:', this.claseCodigo);
         this.cargarAlumnosParaAsistencia(this.claseCodigo);
       } else {
-        console.warn('⚠️ No se recibió ID de clase en la URL');
+        console.warn('No se recibió ID de clase en la URL');
       }
     });
   }
@@ -36,13 +36,13 @@ export class PasarListaPage implements OnInit {
   cargarAlumnosParaAsistencia(codigoClase: string) {
     this.dataService.getClaseDetalle(codigoClase).subscribe({
       next: (alumnos) => {
-        console.log('📗 Alumnos cargados:', alumnos);
+        console.log('Alumnos cargados:', alumnos);
         this.alumnosAsistencia = alumnos.map((a: any) => ({
           ...a,
           asistencia: 'P'
         }));
       },
-      error: (err) => console.error('❌ Error al cargar alumnos:', err)
+      error: (err) => console.error('Error al cargar alumnos:', err)
     });
   }
 
@@ -54,7 +54,7 @@ export class PasarListaPage implements OnInit {
     }));
 
     console.log('📋 Asistencia guardada:', listaGuardar);
-    // 🔹 Aquí iría la lógica real de guardado (por ahora solo log)
+    // Aquí iría la lógica real de guardado (por ahora solo log)
     this.navCtrl.back();
   }
 

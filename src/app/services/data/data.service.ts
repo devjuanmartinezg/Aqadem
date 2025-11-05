@@ -47,6 +47,9 @@ export class DataService {
   /**
    * 👩‍🏫 Devuelve los alumnos pertenecientes a una clase (por su código textual)
    */
+  /**
+ * 👩‍🏫 Devuelve los alumnos pertenecientes a una clase (por su código textual)
+ */
   getAlumnosByClaseId(codigoClase: string): Observable<any[]> {
     if (!codigoClase) {
       console.warn('⚠️ getAlumnosByClaseId llamado sin código de clase');
@@ -58,13 +61,15 @@ export class DataService {
 
     console.log('📘 Cargando alumnos desde:', fileName);
 
-    return this.http.get<any[]>(fileName).pipe(
+    return this.http.get<any>(fileName).pipe(
+      map(res => res.data || []), // 👈 corrige la estructura real
       catchError((err: any) => {
         console.error('❌ Error al cargar alumnos para', codigoNormalizado, err);
         return of([]);
       })
     );
   }
+
 
   /**
    * 👤 Devuelve un alumno específico por su ID (buscando en todos los grupos)

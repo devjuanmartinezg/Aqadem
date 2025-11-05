@@ -1,43 +1,187 @@
-/* Estilos para src/app/clase-detalle/clase-detalle.page.scss */
-/* Estilo para el icono de perfil */
-.user-icon-size {
-  font-size: 2.5em; /* Tamaño del icono */
-  margin-right: 15px;
-}
-/* Contenedor principal de la lista */
-ion-list {
-  padding: 0;
-  margin-top: 20px;
-  background: transparent; // Para que la lista no tenga un fondo blanco sólido
+// /* ============================
+//    Clase Detalle - Estilos base
+//    ============================ */
+
+// /* 🧍 Icono por defecto del alumno */
+// .user-icon-size {
+//   font-size: 2.5em;
+//   margin-right: 15px;
+//   color: var(--ion-color-primary);
+// }
+
+// /* 🧾 Lista de alumnos */
+// ion-list {
+//   margin-top: 1.25rem;
+//   padding: 0;
+//   background: transparent;
+// }
+
+// /* 🎴 Tarjeta individual del alumno */
+// ion-item {
+//   --background: var(--ion-color-light);
+//   --border-radius: 10px;
+//   --padding-start: 15px;
+//   --padding-end: 15px;
+
+//   margin-bottom: 0.75rem;
+//   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+//   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+//   &:hover {
+//     transform: translateY(-2px);
+//     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+//   }
+// }
+
+// /* 🧑‍🎓 Contenido del alumno */
+// ion-label {
+//   padding: 10px 0;
+
+//   h3 {
+//     font-weight: 600;
+//     font-size: 1.1em;
+//     color: var(--ion-color-dark);
+//     margin-bottom: 4px;
+//   }
+
+//   p {
+//     font-size: 0.85em;
+//     color: var(--ion-color-medium);
+//     margin: 2px 0;
+//   }
+// }
+
+// /* 🧭 FAB (botón flotante) */
+// ion-fab-button {
+//   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+//   transition: transform 0.2s ease;
+
+//   &:hover {
+//     transform: scale(1.05);
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+/* =============================
+   HEADER robusto - override Ionic
+   ============================= */
+
+/* Variables del componente */
+:host {
+  --teacher-primary: #4a6cf7;
+  --teacher-accent: #9aa8ff;
+  --teacher-bg-start: #eef1fb;
+  --teacher-bg-end: #f8f9ff;
 }
 
-/* Estilo para cada elemento de la lista (cada alumno) */
-ion-item {
-  --background: var(--ion-color-light); // Fondo más claro para la tarjeta del alumno
-  --border-radius: 10px; // Bordes redondeados
-  --padding-start: 15px;
-  --padding-end: 15px;
-  margin-bottom: 12px; // Espacio entre cada tarjeta de alumno
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); // Sombra suave para efecto de tarjeta
+/* Aseguramos que ion-content use el fondo deseado */
+ion-content {
+  --background: linear-gradient(180deg, var(--teacher-bg-start), var(--teacher-bg-end)) !important;
+  background: linear-gradient(180deg, var(--teacher-bg-start), var(--teacher-bg-end)) !important;
 }
 
-/* Contenido del alumno (nombre y detalles) */
-ion-label {
-  padding-top: 10px;
-  padding-bottom: 10px;
+/* ---------- Forzar que el toolbar interno no pinte su fondo "blanco" ---------- */
+/* 1) Variables internas de Ionic */
+ion-toolbar {
+  --background: transparent !important;
+  --ion-toolbar-background: transparent !important; /* fallback */
+  position: relative;
+  overflow: visible;
+}
 
-  h3 {
-    // Estilo para el nombre completo (más grande y negrita)
-    font-weight: 600;
-    font-size: 1.1em;
-    color: var(--ion-color-dark);
-    margin-bottom: 4px;
+/* 2) Si el toolbar expone una parte 'background' (Shadow DOM) */
+ion-toolbar::part(background) {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* 3) Selector clásico por si no usa shadow DOM (compatibilidad) */
+ion-toolbar .toolbar-background,
+ion-toolbar .toolbar-background::before,
+ion-toolbar .toolbar-background::after {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  display: none !important; /* ocultamos la capa por seguridad */
+}
+
+/* ---------- Creamos YA nuestro propio "header visual" como pseudo-elemento ---------- */
+ion-header {
+  position: sticky;
+  top: 0;
+  z-index: 50; /* por encima del resto */
+}
+
+/* Añadimos el fondo moderno (degradado + curvas + sombra) como pseudo del toolbar */
+ion-toolbar {
+  /* quitamos cualquier padding extra que cree la caja blanca */
+  padding: 0.45rem 0.85rem !important;
+
+  /* pseudo que renderiza nuestro diseño, encima del background interno que ahora está oculto */
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    background: linear-gradient(135deg, var(--teacher-primary), var(--teacher-accent));
+    box-shadow: 0 10px 28px rgba(74,108,247,0.22);
+    z-index: -1; /* detrás del contenido del toolbar */
+    pointer-events: none;
+    /* fallback para browsers sin backdrop-filter */
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
   }
 
-  p {
-    // Estilo para el ID y el email (más pequeños y grises)
-    font-size: 0.85em;
-    color: var(--ion-color-medium);
-    margin: 2px 0;
+  /* Títulos y botones por encima del pseudo */
+  ion-title {
+    color: #fff !important;
+    font-weight: 600;
+  }
+  ion-button, ion-icon {
+    color: #fff !important;
+  }
+}
+
+/* ---------- Ajustes para evitar "cajas blancas" residuales ---------- */
+/* Algunas clases de Ionic (ios/md) aplican sombras: las anulamos */
+ion-header, ion-toolbar, .toolbar, .toolbar-background {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ---------- Tarjetas y lista: asegurar que no se vean blancas sobre el header ---------- */
+ion-list {
+  margin-top: 1.2rem;
+  padding: 0 1rem;
+  background: transparent;
+}
+
+ion-item {
+  --background: rgba(255,255,255,0.92);
+  --border-radius: 14px;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 18px rgba(74,108,247,0.12);
+}
+
+/* Si usas modo oscuro, añade overrides específicos (opcional) */
+@media (prefers-color-scheme: dark) {
+  :host {
+    --teacher-bg-start: #121217;
+    --teacher-bg-end: #22232a;
   }
 }

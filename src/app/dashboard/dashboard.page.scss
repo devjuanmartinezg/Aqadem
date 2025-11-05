@@ -1,19 +1,31 @@
+/* =======================
+   DASHBOARD GENERAL STYLE
+   ======================= */
+
+/* ---------- CABECERA ---------- */
 .dashboard-header {
-  --background: #ffffff;
-  --border-color: #e5e7eb;
-  border-bottom: 1px solid var(--border-color);
+  background: linear-gradient(135deg, #4a90e2, #6a60f5);
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .header-toolbar {
-  --background: #ffffff;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --min-height: 64px;
+  --background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: #fff;
+  padding: 12px 16px;
+  min-height: 64px;
 }
 
+ion-menu-button,
+ion-button[slot="end"] {
+  --color: #fff;
+  font-size: 1.4em;
+}
+
+/* ---------- TEXTO DE BIENVENIDA ---------- */
 .header-content {
   flex: 1;
   display: flex;
@@ -26,52 +38,47 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
+
+  .welcome-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .user-name {
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
 }
 
-.welcome-label {
-  font-size: 12px;
-  color: #9ca3af;
-  font-weight: 500;
-}
-
-.user-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: #000000;
-}
-
-ion-menu-button {
-  --color: #6b7280;
-}
-
-ion-button[slot="end"] {
-  --color: #2b82ff;
-}
-
+/* ---------- CONTENIDO ---------- */
 .dashboard-content {
-  --background: #ffffff;
+  --background: #f7f8fc;
   padding: 0;
 }
 
+/* ---------- TÍTULO PRINCIPAL ---------- */
 .dashboard-title {
-  padding: 24px 16px 16px 16px;
-  
+  padding: 28px 16px 16px 16px;
+
   h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
-    color: #000000;
+    color: #1a1a1a;
     margin: 0;
   }
 }
 
+/* ---------- SECCIONES ---------- */
 .section {
-  padding: 0 16px 24px 16px;
+  padding: 0 16px 32px 16px;
 
   h2 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
-    color: #000000;
-    margin: 0 0 12px 0;
+    color: #1a1a1a;
+    margin: 0;
   }
 }
 
@@ -79,7 +86,7 @@ ion-button[slot="end"] {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 
   h2 {
     margin: 0;
@@ -87,28 +94,28 @@ ion-button[slot="end"] {
 }
 
 .ver-todas-btn {
-  --color: #2b82ff;
+  --color: #4a90e2;
   font-size: 14px;
   font-weight: 500;
   text-transform: none;
-  --padding-start: 0;
-  --padding-end: 0;
+  letter-spacing: -0.2px;
 }
 
-// Tarjetas
+/* ---------- TARJETAS DE CLASES ---------- */
 .class-card {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.25s ease;
   margin-bottom: 12px;
-  transition: all 0.2s ease;
 
   &:active {
-    background: #f9fafb;
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -116,16 +123,17 @@ ion-button[slot="end"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: #dbeafe;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #dce8ff, #eef2ff);
+  border-radius: 14px;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(43, 130, 255, 0.2);
 }
 
 .class-icon {
-  font-size: 24px;
-  color: #2b82ff;
+  font-size: 26px;
+  color: #4a90e2;
 }
 
 .class-info {
@@ -134,13 +142,13 @@ ion-button[slot="end"] {
   h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #000000;
+    color: #1a1a1a;
     margin: 0 0 4px 0;
   }
 
   p {
     font-size: 13px;
-    color: #9ca3af;
+    color: #8a8a8a;
     margin: 0;
   }
 }
@@ -148,23 +156,23 @@ ion-button[slot="end"] {
 .chevron-icon {
   font-size: 20px;
   color: #d1d5db;
-  flex-shrink: 0;
 }
 
-// Tarjetas de los mensajes
+/* ---------- MENSAJES ---------- */
 .message-card {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 16px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   margin-bottom: 12px;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 
   &:active {
-    background: #f9fafb;
+    transform: scale(0.98);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -182,55 +190,31 @@ ion-button[slot="end"] {
   h3 {
     font-size: 16px;
     font-weight: 600;
-    color: #000000;
+    color: #1a1a1a;
     margin: 0 0 4px 0;
   }
 
   p {
     font-size: 13px;
-    color: #9ca3af;
+    color: #8a8a8a;
     margin: 0;
   }
 }
 
-// Acciones rápidas
-.quick-action-card {
-  padding: 20px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 12px;
-}
-
-.action-text {
-  margin-bottom: 16px;
-
-  h3 {
-    font-size: 16px;
-    font-weight: 600;
-    color: #000000;
-    margin: 0 0 8px 0;
-  }
-
-  p {
-    font-size: 14px;
-    color: #6b7280;
-    margin: 0;
-    line-height: 1.5;
-  }
-}
-
+/* ---------- BOTONES / ACCIONES ---------- */
 .register-button {
-  --background: #2b82ff;
-  --background-activated: #1e5fb8;
-  --color: #ffffff;
+  --background: #4a90e2;
+  --background-activated: #3a6edc;
+  --color: #fff;
   font-weight: 600;
   font-size: 16px;
   border-radius: 8px;
   height: 48px;
-  box-shadow: 0 4px 12px rgba(43, 130, 255, 0.3);
   text-transform: none;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 }
 
+/* ---------- ESPACIADO FINAL ---------- */
 .bottom-spacing {
-  height: 20px;
+  height: 32px;
 }

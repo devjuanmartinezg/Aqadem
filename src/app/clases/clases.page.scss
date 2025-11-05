@@ -1,214 +1,437 @@
-/* Colores de los avatares */
-.bg-blue { background-color: #c5d9f1; color: #3880ff; }
-.bg-green { background-color: #d4f5e8; color: #10dc60; }
-.bg-orange { background-color: #ffe8d1; color: #ff9500; }
-.bg-default { background-color: #e8e8e8; color: #666; }
+// /* Colores de los avatares */
+// .bg-blue { background-color: #c5d9f1; color: #3880ff; }
+// .bg-green { background-color: #d4f5e8; color: #10dc60; }
+// .bg-orange { background-color: #ffe8d1; color: #ff9500; }
+// .bg-default { background-color: #e8e8e8; color: #666; }
 
-/* Barra superior del encabezado */
-ion-header ion-toolbar {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  display: flex;
-  align-items: center;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  border-bottom: 1px solid #f0f0f0;
+// /* Barra superior del encabezado */
+// ion-header ion-toolbar {
+//   padding-top: 16px;
+//   padding-bottom: 16px;
+//   display: flex;
+//   align-items: center;
+//   --padding-start: 16px;
+//   --padding-end: 16px;
+//   border-bottom: 1px solid #f0f0f0;
+
+//   ion-title {
+//     font-weight: 700;
+//     font-size: 1.3em;
+//     text-align: center;
+//     flex: 1;
+//   }
+
+//   ion-button {
+//     --color: #607d8b;
+//     font-size: 1.3em;
+//   }
+// }
+
+// /* Contenido principal */
+// .clases-content {
+//   padding: 16px 0;
+//   background-color: #f9f9f9;
+// }
+
+// /* Lista de clases */
+// .clases-list {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 12px;
+//   padding: 0 16px;
+// }
+
+// /* Tarjeta de clase */
+// .clase-card {
+//   background-color: white;
+//   border-radius: 16px;
+//   overflow: hidden;
+//   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+//   transition: box-shadow 0.3s ease, transform 0.2s ease;
+  
+//   &:active {
+//     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+//     transform: translateY(-2px);
+//   }
+// }
+
+// .clase-card-content {
+//   padding: 16px;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 12px;
+// }
+
+// /* Cabecera de la clase */
+// .clase-header {
+//   display: flex;
+//   align-items: flex-start;
+//   gap: 12px;
+// }
+
+// /* Icono de la clase */
+// .clase-icon {
+//   width: 56px;
+//   height: 56px;
+//   border-radius: 14px;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   font-size: 28px;
+//   flex-shrink: 0;
+//   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+// }
+
+// /* Información de la clase */
+// .clase-info {
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   gap: 6px;
+// }
+
+// .clase-nombre {
+//   font-size: 18px;
+//   font-weight: 700;
+//   margin: 0;
+//   color: #1a1a1a;
+//   letter-spacing: -0.3px;
+// }
+
+// .clase-detalles {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 4px;
+//   font-size: 13px;
+//   color: #888;
+// }
+
+// /* Línea con icono y texto */
+// .detalle-item {
+//   display: flex;
+//   align-items: center;
+//   gap: 6px;
+  
+//   ion-icon {
+//     font-size: 14px;
+//     color: #999;
+//   }
+  
+//   span {
+//     color: #888;
+//   }
+// }
+
+// /* Icono de navegación lateral */
+// .chevron-icon {
+//   font-size: 24px;
+//   color: #d0d0d0;
+//   align-self: flex-start;
+//   margin-top: 2px;
+// }
+
+// /* Parte inferior de la tarjeta */
+// .clase-footer {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding-top: 10px;
+//   border-top: 1px solid #f0f0f0;
+// }
+
+// /* Información de alumnos */
+// .alumnos-info {
+//   display: flex;
+//   align-items: center;
+//   gap: 6px;
+//   font-size: 13px;
+//   color: #666;
+//   font-weight: 500;
+  
+//   ion-icon {
+//     font-size: 16px;
+//     color: #999;
+//   }
+// }
+
+// /* Botón de detalles */
+// .btn-detalles {
+//   --color: #3880ff;
+//   font-size: 13px;
+//   font-weight: 600;
+//   text-transform: none;
+//   padding: 0;
+//   height: auto;
+//   letter-spacing: -0.2px;
+  
+//   &::part(native) {
+//     text-decoration: none;
+//   }
+// }
+
+// /* Barra del buscador */
+// .search-toolbar {
+//   --background: #f9f9f9;
+//   --border-color: transparent;
+//   padding: 8px 0;
+// }
+
+// /* Caja del buscador */
+// ion-searchbar {
+//   --background: white;
+//   --border-radius: 8px;
+//   --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+// }
+
+// /* Adaptación a pantallas pequeñas */
+// @media (max-width: 480px) {
+//   .clase-card-content {
+//     padding: 14px;
+//     gap: 10px;
+//   }
+
+//   .clase-icon {
+//     width: 48px;
+//     height: 48px;
+//     font-size: 24px;
+//   }
+
+//   .clase-nombre {
+//     font-size: 16px;
+//   }
+
+//   .clase-detalles {
+//     font-size: 12px;
+//   }
+
+//   .detalle-item {
+//     gap: 4px;
+    
+//     ion-icon {
+//       font-size: 12px;
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =============================
+   MIS GRUPOS - Estilo moderno unificado
+   ============================= */
+
+:host {
+  --teacher-primary: #4a6cf7;
+  --teacher-accent: #9aa8ff;
+  --teacher-bg-start: #eef1fb;
+  --teacher-bg-end: #f8f9ff;
+  --teacher-glass-bg: rgba(255, 255, 255, 0.92);
+}
+
+/* ---------- Fondo general ---------- */
+ion-content {
+  --background: linear-gradient(180deg, var(--teacher-bg-start), var(--teacher-bg-end)) !important;
+  background: linear-gradient(180deg, var(--teacher-bg-start), var(--teacher-bg-end)) !important;
+  padding: 0 1rem;
+}
+
+/* ---------- HEADER (igual estilo que el anterior) ---------- */
+ion-header, ion-toolbar, .toolbar-background {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+ion-toolbar {
+  --background: transparent !important;
+  --ion-toolbar-background: transparent !important;
+  padding: 0.45rem 0.85rem !important;
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    background: linear-gradient(135deg, var(--teacher-primary), var(--teacher-accent));
+    box-shadow: 0 10px 28px rgba(74,108,247,0.22);
+    z-index: -1;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
 
   ion-title {
-    font-weight: 700;
-    font-size: 1.3em;
+    color: #fff !important;
+    font-weight: 600;
     text-align: center;
-    flex: 1;
   }
 
-  ion-button {
-    --color: #607d8b;
-    font-size: 1.3em;
+  ion-button, ion-icon {
+    color: #fff !important;
   }
 }
 
-/* Contenido principal */
-.clases-content {
-  padding: 16px 0;
-  background-color: #f9f9f9;
+/* ---------- BUSCADOR ---------- */
+ion-toolbar:has(ion-searchbar) {
+  /* Quitamos el fondo degradado heredado */
+  background: transparent !important;
+  --background: transparent !important;
+  --ion-toolbar-background: transparent !important;
+
+  /* Eliminamos cualquier sombra o borde */
+  box-shadow: none !important;
+  border: none !important;
+  overflow: visible;
+
+  /* Quitamos también el pseudo-elemento de degradado azul del header */
+  &::before {
+    display: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    content: none !important;
+  }
+
+  /* Ajustamos el espaciado */
+  padding: 0.25rem 0.85rem !important;
 }
 
-/* Lista de clases */
-.clases-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 0 16px;
+/* Mejoramos el aspecto del propio buscador */
+ion-toolbar ion-searchbar {
+  --background: #ffffff;
+  --border-radius: 10px;
+  --box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  --placeholder-color: #777;
+  --color: #1a1a1a;
+  margin: 0.5rem 0 1rem;
 }
 
-/* Tarjeta de clase */
+/* ---------- TARJETAS DE GRUPOS ---------- */
 .clase-card {
-  background-color: white;
-  border-radius: 16px;
+  background: var(--teacher-glass-bg);
+  border-radius: 18px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 6px 20px rgba(74, 108, 247, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  
-  &:active {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 26px rgba(74, 108, 247, 0.18);
+  }
+
+  ion-item {
+    --background: transparent;
   }
 }
 
-.clase-card-content {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* Cabecera de la clase */
-.clase-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-/* Icono de la clase */
-.clase-icon {
-  width: 56px;
-  height: 56px;
+/* Icono del grupo (avatar) */
+ion-avatar {
+  width: 52px;
+  height: 52px;
   border-radius: 14px;
+  background: rgba(74, 108, 247, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
-  flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
 
-/* Información de la clase */
-.clase-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.clase-nombre {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0;
-  color: #1a1a1a;
-  letter-spacing: -0.3px;
-}
-
-.clase-detalles {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 13px;
-  color: #888;
-}
-
-/* Línea con icono y texto */
-.detalle-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  
   ion-icon {
-    font-size: 14px;
-    color: #999;
-  }
-  
-  span {
-    color: #888;
+    font-size: 1.6rem;
+    color: var(--teacher-primary);
   }
 }
 
-/* Icono de navegación lateral */
-.chevron-icon {
-  font-size: 24px;
-  color: #d0d0d0;
-  align-self: flex-start;
-  margin-top: 2px;
-}
+/* ---------- Información del grupo ---------- */
+ion-label {
+  h2 {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+  }
 
-/* Parte inferior de la tarjeta */
-.clase-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 10px;
-  border-top: 1px solid #f0f0f0;
-}
+  p {
+    font-size: 0.85rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 
-/* Información de alumnos */
-.alumnos-info {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: #666;
-  font-weight: 500;
-  
-  ion-icon {
-    font-size: 16px;
-    color: #999;
+    ion-icon {
+      font-size: 0.95rem;
+      color: var(--teacher-primary);
+    }
   }
 }
 
-/* Botón de detalles */
+/* ---------- Botón "Ver detalles" ---------- */
 .btn-detalles {
-  --color: #3880ff;
-  font-size: 13px;
+  font-size: 0.85rem;
   font-weight: 600;
   text-transform: none;
-  padding: 0;
-  height: auto;
-  letter-spacing: -0.2px;
-  
+  color: var(--teacher-primary);
+  margin-left: auto;
+
   &::part(native) {
     text-decoration: none;
   }
 }
 
-/* Barra del buscador */
-.search-toolbar {
-  --background: #f9f9f9;
-  --border-color: transparent;
-  padding: 8px 0;
+/* ---------- Fila inferior de alumnos ---------- */
+ion-item:last-child {
+  border-top: 1px solid rgba(74, 108, 247, 0.1);
+  padding-top: 0.3rem;
+  font-size: 0.9rem;
+  color: #444;
+
+  ion-icon {
+    color: var(--teacher-primary);
+    font-size: 1.1rem;
+  }
 }
 
-/* Caja del buscador */
-ion-searchbar {
-  --background: white;
-  --border-radius: 8px;
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+/* ---------- Spinner de carga ---------- */
+.spinner-center {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
-/* Adaptación a pantallas pequeñas */
+/* ---------- Adaptación móvil ---------- */
 @media (max-width: 480px) {
-  .clase-card-content {
-    padding: 14px;
-    gap: 10px;
-  }
+  ion-avatar {
+    width: 44px;
+    height: 44px;
 
-  .clase-icon {
-    width: 48px;
-    height: 48px;
-    font-size: 24px;
-  }
-
-  .clase-nombre {
-    font-size: 16px;
-  }
-
-  .clase-detalles {
-    font-size: 12px;
-  }
-
-  .detalle-item {
-    gap: 4px;
-    
     ion-icon {
-      font-size: 12px;
+      font-size: 1.4rem;
     }
+  }
+
+  ion-label h2 {
+    font-size: 1rem;
+  }
+
+  ion-label p {
+    font-size: 0.8rem;
   }
 }

@@ -1,0 +1,132 @@
+/* ---------- CABECERA MODERNA (igual que en las otras pantallas) ---------- */
+/* ---------- CABECERA (idéntica a las otras pantallas) ---------- */
+ion-header {
+  background: linear-gradient(135deg, #4a90e2, #6a60f5);
+  border: none;
+  box-shadow: none;
+
+  ion-toolbar {
+    --background: transparent;
+    box-shadow: none;
+    border: none;
+    color: #fff;
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    ion-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #fff;
+      text-align: center;
+      flex: 1;
+    }
+
+    ion-buttons ion-button {
+      --color: #fff;
+      font-size: 1.4rem;
+    }
+
+    ion-icon {
+      color: #fff;
+    }
+  }
+}
+
+
+/* ---------- CONTENIDO CON FONDO CLARO DEGRADADO ---------- */
+ion-content {
+  --background: linear-gradient(180deg, #eef2ff 0%, #f9faff 100%);
+  padding: 16px;
+
+  /* Avatar del alumno */
+  .avatar-header {
+    margin-top: 20px;
+    text-align: center;
+
+    ion-avatar {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 12px;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-avatar {
+      font-size: 6rem;
+      color: #4a90e2;
+    }
+
+    h2 {
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: 8px;
+    }
+
+    .matricula-id {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Tarjeta de información personal */
+  ion-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+    backdrop-filter: blur(8px);
+
+    ion-card-header {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+      ion-card-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #333;
+      }
+    }
+
+    ion-card-content {
+      ion-item {
+        --background: transparent;
+        --border-color: transparent;
+        --padding-start: 0;
+        --inner-padding-end: 0;
+
+        ion-icon {
+          color: #4a90e2;
+          font-size: 1.2rem;
+          margin-right: 10px;
+        }
+
+        ion-label {
+          p {
+            font-size: 0.8rem;
+            color: #777;
+            margin: 0;
+          }
+
+          h3 {
+            font-weight: 600;
+            color: #222;
+            margin: 2px 0 0;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  /* Spinner centrado */
+  .ion-text-center {
+    ion-spinner {
+      margin-top: 40px;
+      transform: scale(1.2);
+    }
+
+    p {
+      color: #666;
+      margin-top: 10px;
+    }
+  }
+}

@@ -19,7 +19,7 @@
   <ion-list *ngIf="alumnosAsistencia.length > 0">
     <ion-item *ngFor="let alumno of alumnosAsistencia">
       
-      <!-- 🧑‍🎓 Avatar -->
+      <!-- Icono -->
       <ion-avatar slot="start" *ngIf="alumno.foto?.content">
         <img [src]="'data:image/jpeg;base64,' + alumno.foto.content" alt="Foto de {{ alumno.RazonSocial }}">
       </ion-avatar>
@@ -32,13 +32,13 @@
         class="user-icon-size">
       </ion-icon>
 
-      <!-- 📝 Datos del alumno -->
+      <!-- Datos del alumno -->
       <ion-label>
         <h3>{{ alumno.RazonSocial }} {{ alumno.NombreComercial }}</h3>
         <p>ID: {{ alumno.ID }}</p>
       </ion-label>
 
-      <!-- 🎯 Controles de asistencia -->
+      <!-- Controles de asistencia -->
       <ion-segment [(ngModel)]="alumno.asistencia" class="asistencia-segment">
         <ion-segment-button value="P" title="Presente">
           <ion-icon name="checkmark-circle"></ion-icon>
