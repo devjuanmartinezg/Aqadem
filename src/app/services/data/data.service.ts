@@ -1,6 +1,6 @@
 // src/app/services/data/data.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map, switchMap, of, catchError } from 'rxjs';
 
 @Injectable({
@@ -9,7 +9,21 @@ import { Observable, map, switchMap, of, catchError } from 'rxjs';
 export class DataService {
   private readonly basePath = 'assets/data/';
 
+  private API_URL = '';
+
   constructor(private http: HttpClient) {}
+  
+  login(email: string, password: string): Observable<any> {
+    return this.http.post(`${this.API_URL}/login`, { email, password });
+  }
+
+  // Ejemplo de API protegida
+  getUserProfile(token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.get(`${this.API_URL}/profile`, { headers });
+  }
 
   /**
    * 📘 Devuelve la lista de clases desde portada.json

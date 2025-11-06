@@ -1,1 +1,65 @@
+.dashboard-tab-bar {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: #ffffff;
+  border-radius: 18px 18px 0px 0px;
+  padding: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
+ion-tab-button {
+  color: #8a8a8a;
+  transition: all 0.3s ease;
+  border-radius: 14px;
+  position: relative;
+
+  ion-icon {
+    font-size: 1.6rem;
+    margin-bottom: 4px;
+    transition: transform 0.3s ease;
+  }
+
+  ion-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+  }
+
+  &:hover {
+    color: #4a90e2;
+  }
+
+  &.tab-selected {
+    background: linear-gradient(135deg, #4a90e2, #6a60f5);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.25);
+    transform: translateY(-4px);
+
+    ion-icon {
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* Animación suave en el icono seleccionado */
+ion-tab-button.tab-selected ion-icon {
+  animation: float 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+/* Efecto "tap" */
+ion-tab-button:active {
+  transform: scale(0.96);
+}

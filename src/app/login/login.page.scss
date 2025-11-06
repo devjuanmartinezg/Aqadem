@@ -2,6 +2,7 @@ ion-content {
   position: relative;
   --background: none;
 
+  /* Fondo principal */
   .background {
     position: absolute;
     inset: 0;
@@ -9,6 +10,7 @@ ion-content {
     z-index: 0;
   }
 
+  /* Caja de login con efecto glassmorphism */
   .login-box {
     position: absolute;
     top: 50%;
@@ -17,13 +19,32 @@ ion-content {
     width: 85%;
     max-width: 360px;
     padding: 40px 25px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
     text-align: center;
     z-index: 1;
+  }
+
+  /* Logo circular con sombra */
+  .divLogo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
+  }
+
+  .app-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
   }
 
   h1 {
@@ -31,117 +52,109 @@ ion-content {
     color: #fff;
     font-size: 1.6rem;
     font-weight: 600;
+    letter-spacing: 0.5px;
   }
 
-  .divLogo{
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    display: block;
-    object-fit: contain;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-  }
-
-  .app-logo {
-    width: 100px;
-    height: 100px;
-    }
-  
-
-  ion-item {
+  /* Campos de entrada */
+  .input-with-icon {
     --background: transparent;
-    --color: #fff;
-    --border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
     margin-bottom: 15px;
+    padding-left: 5px;
+    transition: all 0.3s ease;
+
+    ion-icon {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-right: 8px;
+    }
 
     ion-input {
       color: #fff;
-      text-align: left;
+      font-size: 1.05rem;
+      padding: 12px 0;
+      caret-color: #3dc2ff;
+    }
+
+    &:focus-within {
+      border-color: #3dc2ff;
+      box-shadow: 0 0 8px rgba(61, 194, 255, 0.4);
     }
   }
 
+  .password-toggle {
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.4rem;
+  }
+
+  /* Botón principal */
   .login-btn {
     --background: linear-gradient(135deg, #3dc2ff, #3880ff);
-    margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 12px;
+    font-weight: 600;
     text-transform: uppercase;
-    font-weight: 500;
+    margin-top: 20px;
+    letter-spacing: 0.5px;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+      filter: brightness(1.1);
+    }
   }
-  
-  .warningP{
+
+  /* Botón biométrico */
+  ion-button[fill="outline"] {
+    --border-color: #fff;
+    --color: #fff;
+    border-radius: 12px;
+    margin-top: 15px;
+    font-weight: 500;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  /* Mensaje de error */
+  .warningP {
     width: 100%;
     max-width: 320px;
     margin: 0 auto 24px auto;
-    background-color: rgb(253, 120, 120);
-    padding: 20px;
-    border-radius: 15px;
-}
-.input-icon {
-  color: white;
-  font-size: 1.3rem;
-  margin-right: 10px;
-}
-
-.input-with-icon {
-  --background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
-  margin-bottom: 15px;
-  padding-left: 5px;
-
-  ion-input {
+    background-color: rgba(253, 120, 120, 0.9);
+    padding: 14px;
+    border-radius: 12px;
     color: white;
-    font-size: 1.1rem;
-    padding: 12px 0;
+    font-size: 0.95rem;
+    text-align: center;
+    backdrop-filter: blur(5px);
+  }
+
+  /* Línea separadora (para “o”) */
+  .separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1.5rem 0;
+
+    .line {
+      flex: 1;
+      height: 1px;
+      background-color: rgba(255, 255, 255, 0.3);
+    }
+
+    span {
+      margin: 0 0.7rem;
+      color: #fff;
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Efecto focus para mejorar contraste en Android/iOS */
+  ion-item.md-focused,
+  ion-item.ios-focused {
+    --highlight-color-focused: #3dc2ff !important;
+    border-color: #3dc2ff !important;
   }
 }
-
-.password-toggle {
-  color: white;
-  cursor: pointer;
-  font-size: 1.4rem;
-}
-
-/* Para icono en <ion-icon> */
-.icono-candado {
-  color: #fff;
-  font-size: 1.4rem;
-}
-
-/* Cambia el color del cursor (la barra que parpadea) */
-.login-box ion-input {
-  caret-color: #3880ff !important;  /* Azul Ionic primario */
-}
-
-/* Para el borde activo (highlight) en modo md (Android) */
-.login-box ion-item.md-focused {
-  --highlight-color-focused: #3880ff !important;
-}
-
-/* Para el borde activo en modo ios */
-.login-box ion-item.ios-focused {
-  --border-color-focused: #3880ff !important;
-  border-color: #3880ff !important;
-}
-
-/* Opción extra para forzar línea inferior azul en ion-input con borde */
-.login-box ion-input:focus {
-  outline-color: #3880ff !important;
-  border-color: #3880ff !important;
-}
-
-
-
-
-}
-
-
-
-
-
