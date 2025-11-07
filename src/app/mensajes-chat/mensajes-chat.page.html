@@ -23,12 +23,14 @@
 
 <ion-content class="chat-content">
   <div class="chat-messages">
-    <div *ngFor="let msg of conversacion"
-         [ngClass]="{'from-me': msg.fromMe, 'from-them': !msg.fromMe}"
+    <div *ngFor="let msg of conversacion" 
+         [ngClass]="{'from-me': msg.fromMe, 'from-them': !msg.fromMe}" 
          class="chat-message">
+
       <ion-avatar class="avatar-chat" (click)="goToPerfil(msg.userId)">
         <img [src]="getAvatar(msg.userId)" />
       </ion-avatar>
+
       <div class="bubble">
         <p>{{ msg.texto }}</p>
         <span class="hora">{{ msg.hora }}</span>
@@ -39,9 +41,14 @@
 
 <ion-footer>
   <ion-toolbar class="chat-footer">
-    <ion-input [(ngModel)]="nuevoMensaje" placeholder="Escribe un mensaje..."></ion-input>
+    <ion-input [(ngModel)]="nuevoMensaje" 
+               placeholder="Escribe un mensaje..." 
+               type="text"
+               clear-input="true">
+    </ion-input>
+
     <ion-buttons slot="end">
-      <ion-button (click)="enviarMensaje()">
+      <ion-button (click)="enviarMensaje()" fill="solid" color="primary">
         <ion-icon name="send"></ion-icon>
       </ion-button>
     </ion-buttons>

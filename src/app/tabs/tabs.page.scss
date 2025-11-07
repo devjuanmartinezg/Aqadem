@@ -1,10 +1,13 @@
+/* ===============================
+   DASHBOARD TAB BAR ESTILOS
+   =============================== */
 .dashboard-tab-bar {
   position: relative;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background: #ffffff;
-  border-radius: 18px 18px 0px 0px;
+  border-radius: 18px 18px 0 0;
   padding: 6px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.05);
@@ -12,8 +15,13 @@
   transition: all 0.3s ease;
 }
 
+/* -------------------------------
+   TAB BUTTONS
+   ------------------------------- */
 ion-tab-button {
-  color: #8a8a8a;
+  color: #8a8a8a;           /* color inactivo */
+  --color: #8a8a8a;         /* icono y label inactivo */
+  --color-selected: #fff;    /* icono y label activo */
   transition: all 0.3s ease;
   border-radius: 14px;
   position: relative;
@@ -30,22 +38,27 @@ ion-tab-button {
   }
 
   &:hover {
-    color: #4a90e2;
-  }
-
-  &.tab-selected {
-    background: linear-gradient(135deg, #4a90e2, #6a60f5);
-    color: #fff;
-    box-shadow: 0 4px 10px rgba(74, 144, 226, 0.25);
-    transform: translateY(-4px);
-
-    ion-icon {
-      transform: scale(1.2);
-    }
+    color: #4a90e2; /* solo efecto hover en escritorio */
   }
 }
 
-/* Animación suave en el icono seleccionado */
+/* -------------------------------
+   TAB ACTIVO
+   ------------------------------- */
+ion-tab-button.tab-selected {
+  background: linear-gradient(135deg, #4a90e2, #6a60f5);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.25);
+  transform: translateY(-4px);
+
+  ion-icon {
+    transform: scale(1.2);
+  }
+}
+
+/* -------------------------------
+   ICONO ACTIVO ANIMADO
+   ------------------------------- */
 ion-tab-button.tab-selected ion-icon {
   animation: float 1.5s ease-in-out infinite alternate;
 }
@@ -59,7 +72,9 @@ ion-tab-button.tab-selected ion-icon {
   }
 }
 
-/* Efecto "tap" */
+/* -------------------------------
+   EFECTO TAP EN TODOS LOS TAB
+   ------------------------------- */
 ion-tab-button:active {
   transform: scale(0.96);
 }
