@@ -10,7 +10,7 @@
     <div class="header-content">
       <div class="welcome-section">
         <span class="welcome-label">Bienvenido</span>
-        <span class="user-name">Carlos Ruiz</span>
+        <span class="user-name">{{ nombreProfesor || 'Profesor' }}</span>
       </div>
     </div>
 
@@ -36,11 +36,11 @@
       <h2>Clases de hoy</h2>
       <ion-button fill="clear" size="small" class="ver-todas-btn" (click)="verTodasClases()">
         Ver todas
-    </ion-button>
+      </ion-button>
     </div>
 
     <!-- Si hay clases -->
-    <ng-container *ngIf="clasesHoy.length > 0; else sinClases">
+    <ng-container *ngIf="(clasesHoy && clasesHoy.length) > 0; else sinClases">
       <div *ngFor="let clase of clasesHoy" class="class-card" (click)="verClase(clase.Nombre)">
         <div class="class-icon-container">
           <ion-icon name="book-outline" class="class-icon"></ion-icon>
@@ -58,6 +58,9 @@
       <p style="color: #9ca3af; text-align: center; font-size: 14px; margin-top: 8px;">
         No hay clases programadas para hoy.
       </p>
+      <div style="text-align:center; margin-top:10px; font-size:14px; color:#666;">
+        {{ apiStatus }}
+      </div>
     </ng-template>
   </div>
 
@@ -67,30 +70,29 @@
       <h2>Mensajes pendientes</h2>
       <ion-button fill="clear" size="small" class="ver-todas-btn" (click)="verTodosMensajes()">
         Ver todos
-    </ion-button>
+      </ion-button>
     </div>
 
-    <div class="message-card">
-      <ion-avatar class="message-avatar">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Avatar" />
-      </ion-avatar>
-      <div class="message-info">
-        <h3>Padre de Ana Gómez</h3>
-        <p>Consulta sobre las notas...</p>
+    <!-- Si hay mensajes -->
+    <ng-container *ngIf="(mensajesPendientes && mensajesPendientes.length) > 0; else sinMensajes">
+      <div *ngFor="let mensaje of mensajesPendientes" class="message-card">
+        <ion-avatar class="message-avatar">
+          <img [src]="mensaje.avatar || 'https://via.placeholder.com/40'" alt="Avatar" />
+        </ion-avatar>
+        <div class="message-info">
+          <h3>{{ mensaje.nombre }}</h3>
+          <p>{{ mensaje.texto }}</p>
+        </div>
+        <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
       </div>
-      <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
-    </div>
+    </ng-container>
 
-    <div class="message-card">
-      <ion-avatar class="message-avatar">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Avatar" />
-      </ion-avatar>
-      <div class="message-info">
-        <h3>Madre de Luis Pérez</h3>
-        <p>Justificante de ausencia</p>
-      </div>
-      <ion-icon name="chevron-forward" class="chevron-icon"></ion-icon>
-    </div>
+    <!-- Si no hay mensajes -->
+    <ng-template #sinMensajes>
+      <p style="color: #9ca3af; text-align: center; font-size: 14px; margin-top: 8px;">
+        No hay mensajes pendientes.
+      </p>
+    </ng-template>
   </div>
 
   <!-- Espaciado final -->

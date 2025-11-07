@@ -1,76 +1,65 @@
-import { Component, OnInit } from "@angular/core";
-import { AlertController } from "@ionic/angular";
-import { Router } from "@angular/router";
-import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../services/dashboard.service';
+import { AuthService } from '../services/data/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./dashboard.page.html",
-  styleUrls: ["./dashboard.page.scss"],
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.page.html',
+  styleUrls: ['./dashboard.page.scss'],
   standalone: false,
 })
 export class DashboardPage implements OnInit {
   clasesHoy: any[] = [];
-  totalAlumnos: number = 0;
+  mensajesPendientes: any[] = [];
+  nombreProfesor: string = 'Profesor';
+  apiStatus: string = '';
 
   constructor(
-    private alertCtrl: AlertController,
-    private router: Router,
-    private http: HttpClient
+    private dashboardService: DashboardService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.cargarDatos();
   }
 
-
   cargarDatos() {
-    this.http.get("assets/data/portada.json").subscribe({
-      next: (response: any) => {
-        if (response?.data) {
-          const data = response.data;
+    const token = this.authService.obtenerToken();
+    if (!token) {
+      this.apiStatus = '⚠️ No hay token guardado. Inicia sesión primero.';
+      return;
+    }
 
-          // Guardamos total de alumnos
-          this.totalAlumnos = Number(data.totalAlumnos || 0);
+    this.dashboardService.getDashboardData(token).subscribe({
+      next: (data) => {
+        console.log('✅ Datos recibidos del dashboard:', data);
 
-          // Tomamos las clases directamente de los eventos del día
-          this.clasesHoy = data.eventos.map((evento: any) => ({
-            Nombre: evento.Nombre,
-            Descripcion: evento.Descripcion,
-            HoraInicio: evento.HoraInicio,
-            HoraFin: evento.HoraFin,
-            NombreAula: evento.NombreAula,
-            DiaSemana: evento.DiaSemana,
-          }));
+        if (data?.data) {
+          this.clasesHoy = data.data.eventos || [];
+          this.apiStatus = '✅ API respondió correctamente (200)';
+        } else {
+          this.apiStatus = '⚠️ Respuesta vacía del servidor.';
         }
       },
       error: (err) => {
-        console.error("Error cargando datos del dashboard:", err);
+        console.error('❌ Error cargando datos del dashboard:', err);
+        this.apiStatus = `❌ Error del servidor: ${err.status || 'desconocido'}`;
       },
     });
   }
 
-  async registrarFaltas() {
-    const alert = await this.alertCtrl.create({
-      header: "Registrar Faltas",
-      message: "Botón clicado: se registrarán las faltas",
-      buttons: ["OK"],
-    });
-    await alert.present();
-  }
 
   verClase(nombreClase: string) {
-    this.router.navigate(["/clase-detalle", encodeURIComponent(nombreClase)]);
+    this.router.navigate(['/clase-detalle', encodeURIComponent(nombreClase)]);
   }
 
   verTodasClases() {
-    this.router.navigate(["/tabs/clases"]);
+    this.router.navigate(['/tabs/clases']);
   }
 
   verTodosMensajes() {
     this.router.navigate(['/tabs/mensajes']);
   }
-
-
-
 }
