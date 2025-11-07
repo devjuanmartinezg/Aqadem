@@ -13,48 +13,49 @@
     <!-- Formulario de login -->
     <form (ngSubmit)="login()" novalidate>
 
-      <ion-item lines="none" class="input-with-icon">
-        <ion-icon name="business-outline" slot="start" class="input-icon"></ion-icon>
-        <ion-input
-          placeholder="Código de centro"
-          [(ngModel)]="codigoCentro"
-          name="codigoCentro"
-          (ionInput)="onInputChange($event)"
-          maxlength="20"
-          required
-        ></ion-input>
-      </ion-item>
+      <!-- Código de centro -->
+    <ion-item lines="none" class="input-with-icon">
+      <ion-icon name="business-outline" slot="start" class="input-icon"></ion-icon>
+      <ion-input
+        placeholder="Código de centro"
+        [(ngModel)]="codigoCentro"
+        name="codigoCentro"
+        (ionInput)="onInputChange($event, 'codigoCentro')"
+        maxlength="20"
+        required
+      ></ion-input>
+    </ion-item>
 
-      <ion-item lines="none" class="input-with-icon">
-        <ion-icon name="person-outline" slot="start" class="input-icon"></ion-icon>
-        <ion-input
-          placeholder="Usuario"
-          [(ngModel)]="username"
-          name="username"
-          (ionInput)="onInputChange($event)"
-          maxlength="20"
-          required
-        ></ion-input>
-      </ion-item>
+    <!-- Usuario -->
+    <ion-item lines="none" class="input-with-icon">
+      <ion-icon name="person-outline" slot="start" class="input-icon"></ion-icon>
+      <ion-input
+        placeholder="Usuario"
+        [(ngModel)]="username"
+        name="username"
+        maxlength="50"
+        required
+      ></ion-input>
+    </ion-item>
 
-      <ion-item lines="none" class="input-with-icon">
-        <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
-        <ion-input
-          placeholder="Contraseña"
-          [type]="showPassword ? 'text' : 'password'"
-          [(ngModel)]="password"
-          name="password"
-          (ionInput)="onInputChange($event)"
-          maxlength="20"
-          required
-        ></ion-input>
-        <ion-icon
-          [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
-          slot="end"
-          class="password-toggle"
-          (click)="togglePassword()"
-        ></ion-icon>
-      </ion-item>
+    <!-- Contraseña -->
+    <ion-item lines="none" class="input-with-icon">
+      <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
+      <ion-input
+        placeholder="Contraseña"
+        [type]="showPassword ? 'text' : 'password'"
+        [(ngModel)]="password"
+        name="password"
+        maxlength="50"
+        required
+      ></ion-input>
+      <ion-icon
+        [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+        slot="end"
+        class="password-toggle"
+        (click)="togglePassword()"
+      ></ion-icon>
+    </ion-item>
 
       <!-- Error message -->
       <ion-text color="danger" *ngIf="errorMessage">

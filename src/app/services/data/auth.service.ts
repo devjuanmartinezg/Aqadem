@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -8,33 +8,38 @@ import { catchError, map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  // 🔹 URL base de tu API (ajústala cuando tengas backend)
-  private apiUrl = 'https://tu-backend.com/api'; 
+  private apiUrl = 'http://localhost:4300'; // proxy local
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Login del usuario (listo para usar API real)
-   */
   login(codigoCentro: string, username: string, password: string): Observable<any> {
-    // 🔹 Ejemplo real cuando tengas backend:
-    // return this.http.post(`${this.apiUrl}/login`, { codigoCentro, username, password })
-    //   .pipe(
-    //     map((response: any) => response),
-    //     catchError(error => of({ success: false, message: 'Error en el servidor', error }))
-    //   );
+    const url = `${this.apiUrl}/api/login_check`;
+    const body = {
+      _username: username,
+      _password: password,
+      codigoHost: codigoCentro
+    };
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    // 🔹 Simulación temporal (sin backend)
-    if (codigoCentro === '12345' && username === 'admin' && password === '1234') {
-      return of({ success: true, token: 'fake-jwt-token' });
-    } else {
-      return of({ success: false, message: 'Credenciales incorrectas' });
-    }
+    return this.http.post(url, body, { headers }).pipe(
+      map((response: any) => {
+        if (response && response.token) {
+          this.guardarToken(response.token);
+          return { success: true, token: response.token };
+        } else {
+          return { success: false, message: 'Respuesta inesperada del servidor.' };
+        }
+      }),
+      catchError(error => {
+        console.error('❌ Error de login:', error);
+        let message = 'Error al conectar con el servidor.';
+        if (error.status === 401) message = 'Credenciales incorrectas.';
+        if (error.status === 504) message = 'El servidor no respondió a tiempo.';
+        return of({ success: false, message });
+      })
+    );
   }
 
-  /**
-   * Ejemplo para guardar el token JWT en localStorage
-   */
   guardarToken(token: string) {
     localStorage.setItem('token', token);
   }

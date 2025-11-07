@@ -26,9 +26,11 @@ export class LoginPage {
   /**
    * Permite solo caracteres alfanuméricos en los campos.
    */
-  onInputChange(event: any) {
+  onInputChange(event: any, tipo: string) {
     const inputValue = event.target.value;
-    event.target.value = inputValue.replace(/[^a-zA-Z0-9]/g, '');
+    if (tipo === 'codigoCentro') {
+      event.target.value = inputValue.replace(/[^a-zA-Z0-9]/g, '');
+    }
   }
 
   /**
@@ -50,26 +52,34 @@ export class LoginPage {
     this.loading = true;
     this.errorMessage = '';
 
-    this.authService.login(this.codigoCentro, this.username, this.password).subscribe({
-      next: (res: any) => {
-        this.loading = false;
+    this.authService.login(this.codigoCentro, this.username, this.password)
+      .subscribe({
+        next: (res: any) => {
+          this.loading = false;
 
-        if (res.success) {
-          // Guarda token si viene del backend
-          if (res.token) localStorage.setItem('token', res.token);
+          if (res.success) {
+            // ✅ Guardamos el token en localStorage
+            this.authService.guardarToken(res.token);
+            console.log('Token recibido:', res.token);
+            this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
+          } else {
+            this.errorMessage = res.message || 'Código, usuario o contraseña incorrectos.';
+          }
+        },
+        error: (err) => {
+          this.loading = false;
+          console.error('❌ Error de login:', err);
 
-          console.log('✅ Login exitoso');
-          this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
-        } else {
-          this.errorMessage = res.message || 'Código, usuario o contraseña incorrectos.';
+          // Diferenciamos según el error
+          if (err.status === 0) {
+            this.errorMessage = 'No se pudo conectar con el servidor.';
+          } else if (err.status === 504) {
+            this.errorMessage = 'El servidor no respondió a tiempo.';
+          } else {
+            this.errorMessage = 'Ocurrió un error inesperado.';
+          }
         }
-      },
-      error: (err) => {
-        this.loading = false;
-        console.error('❌ Error de login:', err);
-        this.errorMessage = 'Error al conectar con el servidor.';
-      }
-    });
+      });
   }
 
   /**
