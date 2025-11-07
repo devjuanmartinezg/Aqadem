@@ -1,6 +1,5 @@
-import { Component, type OnInit } from "@angular/core"
-import { ModalController, NavController } from "@ionic/angular"
-
+import { Component, type OnInit } from "@angular/core";
+import { ModalController, NavController } from "@ionic/angular";
 
 @Component({
   selector: "app-perfil",
@@ -17,11 +16,11 @@ export class PerfilPage implements OnInit {
     asignaturas: ["Matemáticas 1º ESO", "Física 2º Bachillerato", "Tecnología 3º ESO"],
     biografia:
       "Profesor apasionado con más de 10 años de experiencia en la enseñanza de ciencias. Comprometido con el desarrollo académico y personal de mis alumnos a través de métodos innovadores y un enfoque práctico.",
-  }
+  };
 
   constructor(
     private modalCtrl: ModalController,
-    private navCtrl: NavController,
+    private navCtrl: NavController
   ) {}
 
   ngOnInit() {}
@@ -32,22 +31,31 @@ export class PerfilPage implements OnInit {
       componentProps: {
         usuario: this.usuario,
       },
-    })
-    await modal.present()
+    });
+    await modal.present();
 
-    const { data } = await modal.onDidDismiss()
+    const { data } = await modal.onDidDismiss();
     if (data) {
-      this.usuario = { ...this.usuario, ...data }
+      this.usuario = { ...this.usuario, ...data };
     }
   }
 
   cambiarFoto() {
-    console.log("Cambiar foto")
+    console.log("Cambiar foto");
   }
 
+  // ========================
+  // CERRAR SESIÓN
+  // ========================
   cerrarSesion() {
-    console.log("Cerrar sesión")
-    this.navCtrl.navigateRoot("/login")
+    console.log("Cerrar sesión");
+
+    // 1️⃣ Borrar token o datos de sesión
+    localStorage.removeItem('token'); // Asegúrate de usar la misma clave que tu AuthGuard
+    // localStorage.clear(); // opcional: borra todo
+
+    // 2️⃣ Redirigir al login
+    this.navCtrl.navigateRoot("/login");
   }
 }
 
@@ -88,22 +96,20 @@ export class PerfilPage implements OnInit {
   standalone: false,
 })
 export class EditarPerfilModalComponent {
-  usuario: any
-  usuarioEditado: any
+  usuario: any;
+  usuarioEditado: any;
 
   constructor(private modalCtrl: ModalController) {}
 
   ngOnInit() {
-    this.usuarioEditado = { ...this.usuario }
+    this.usuarioEditado = { ...this.usuario };
   }
 
   cerrar() {
-    this.modalCtrl.dismiss()
+    this.modalCtrl.dismiss();
   }
 
   guardar() {
-    this.modalCtrl.dismiss(this.usuarioEditado)
+    this.modalCtrl.dismiss(this.usuarioEditado);
   }
 }
-
-export default PerfilPage

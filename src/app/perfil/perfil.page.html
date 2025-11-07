@@ -2,11 +2,7 @@
   <ion-toolbar class="header-toolbar">
     <ion-title class="header-title">Mi Perfil</ion-title>
 
-    <!-- 
-    =====================================
-    BOTÓN DE EDICIÓN (COMENTADO)
-    =====================================
-
+    <!-- Botón de edición (opcional)
     <ion-buttons slot="end">
       <ion-button color="success" fill="clear" (click)="editarPerfil()" class="edit-button">
         Editar
@@ -21,24 +17,19 @@
   <!-- Cabecera del perfil: avatar grande + nombre + email -->
   <div class="perfil-header">
     <div class="avatar-wrapper">
-      <!-- Foto del usuario de ejemplo -->
       <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Foto de perfil" class="avatar-image" />
 
-      <!-- Botón para cambiar la foto (abre acción o modal) -->
       <ion-fab-button size="small" color="success" (click)="cambiarFoto()" class="camera-button">
         <ion-icon name="camera-outline"></ion-icon>
       </ion-fab-button>
     </div>
 
-    <!-- Nombre y correo del usuario -->
     <h2 class="usuario-nombre">{{ usuario.nombre }}</h2>
     <p class="usuario-email">{{ usuario.email }}</p>
-  </div> <!-- cierre correcto de perfil-header -->
+  </div>
 
   <!-- Datos de contacto del usuario -->
   <div class="perfil-info">
-
-    <!-- Teléfono -->
     <div class="info-card">
       <div class="info-icon-wrapper">
         <ion-icon name="call-outline" class="info-icon"></ion-icon>
@@ -48,7 +39,6 @@
       </div>
     </div>
 
-    <!-- Email -->
     <div class="info-card">
       <div class="info-icon-wrapper">
         <ion-icon name="mail-outline" class="info-icon"></ion-icon>
@@ -59,33 +49,17 @@
     </div>
   </div>
 
-  <!-- Sección con las asignaturas del profesor -->
+  <!-- Sección con las asignaturas -->
   <div class="perfil-section">
     <h3>Mis Asignaturas</h3>
     <div class="asignaturas">
-      <!-- Cada asignatura se muestra en un chip -->
       <ion-chip *ngFor="let asignatura of usuario.asignaturas" color="warning">
         {{ asignatura }}
       </ion-chip>
     </div>
   </div>
 
-  <!-- 
-  =====================================
-  SECCIÓN DE BIOGRAFÍA (COMENTADA)
-  =====================================
-
-  <div class="perfil-section">
-    <h3>Biografía</h3>
-    <ion-card class="bio-card">
-      <ion-card-content>
-        {{ usuario.biografia }}
-      </ion-card-content>
-    </ion-card>
-  </div>
-  -->
-
-  <!-- Botón para cerrar sesión -->
+  <!-- Botón de cerrar sesión -->
   <div class="logout-section">
     <ion-button expand="block" fill="solid" color="danger" (click)="cerrarSesion()" class="logout-button">
       <ion-icon name="log-out-outline" slot="start"></ion-icon>

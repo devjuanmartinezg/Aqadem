@@ -41,3 +41,7 @@ app.post('/api/login_check', async (req, res) => {
 app.listen(4300, () => {
   console.log('✅ Proxy activo en http://localhost:4300 → https://api-dev.reqorda.net');
 });
+
+
+// http://localhost:8100/tabs/dashboard
+// http://localhost:8100/tabs/clases

@@ -13,19 +13,6 @@
     <!-- Formulario de login -->
     <form (ngSubmit)="login()" novalidate>
 
-      <!-- Código de centro -->
-    <ion-item lines="none" class="input-with-icon">
-      <ion-icon name="business-outline" slot="start" class="input-icon"></ion-icon>
-      <ion-input
-        placeholder="Código de centro"
-        [(ngModel)]="codigoCentro"
-        name="codigoCentro"
-        (ionInput)="onInputChange($event, 'codigoCentro')"
-        maxlength="20"
-        required
-      ></ion-input>
-    </ion-item>
-
     <!-- Usuario -->
     <ion-item lines="none" class="input-with-icon">
       <ion-icon name="person-outline" slot="start" class="input-icon"></ion-icon>
@@ -55,6 +42,19 @@
         class="password-toggle"
         (click)="togglePassword()"
       ></ion-icon>
+    </ion-item>
+
+    <!-- Código de centro -->
+    <ion-item lines="none" class="input-with-icon">
+      <ion-icon name="business-outline" slot="start" class="input-icon"></ion-icon>
+      <ion-input
+        placeholder="Código de centro"
+        [(ngModel)]="codigoCentro"
+        name="codigoCentro"
+        (ionInput)="onInputChange($event, 'codigoCentro')"
+        maxlength="20"
+        required
+      ></ion-input>
     </ion-item>
 
       <!-- Error message -->
