@@ -1,15 +1,17 @@
 ion-header {
   .header-toolbar {
-    --background: linear-gradient(135deg, #2b82ff, #6aa8ff);
+    --background: linear-gradient(135deg, #4a90e2, #6a60f5);
     color: #ffffff;
     border: none;
     border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 12px rgba(43, 130, 255, 0.3);
-    padding: 16px;
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
 
+    min-height: 64px;
+    padding: 0 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 
     ion-title {
       font-size: 20px;
@@ -17,11 +19,20 @@ ion-header {
       text-align: center;
       color: #ffffff;
       flex: 1;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    ion-button {
+    ion-button,
+    ion-icon {
       --color: #ffffff;
       font-size: 1.3em;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -56,7 +67,7 @@ ion-header {
       padding: 4px 0;
 
       &.active {
-        color: #2b82ff;
+        color: #4a90e2;
       }
 
       &.active::after {
@@ -67,7 +78,7 @@ ion-header {
         transform: translateX(-50%);
         width: 6px;
         height: 6px;
-        background: #2b82ff;
+        background: #4a90e2;
         border-radius: 50%;
       }
     }
@@ -109,7 +120,7 @@ ion-header {
     top: 0;
     bottom: 0;
     width: 4px;
-    background: #2b82ff;
+    background: #4a90e2;
     border-radius: 12px 0 0 12px;
   }
 
@@ -152,7 +163,7 @@ ion-header {
         color: #9ca3af;
 
         &.hoy {
-          color: #2b82ff;
+          color: #4a90e2;
           font-weight: 500;
         }
       }
@@ -186,7 +197,7 @@ ion-header {
   .empty-icon-container {
     width: 110px;
     height: 110px;
-    background: #e0ecff;
+    background: #dce8ff;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -195,7 +206,7 @@ ion-header {
 
     .empty-icon {
       font-size: 56px;
-      color: #2b82ff;
+      color: #4a90e2;
     }
   }
 

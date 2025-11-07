@@ -1,47 +1,90 @@
-.header-toolbar {
-  min-height: 56px;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+/* =============================
+   PERFIL
+   ============================= */
+
+:host {
+  --teacher-primary: #4a90e2;
+  --teacher-accent: #6a60f5;
+  --teacher-bg-start: #eef1fb;
+  --teacher-bg-end: #f8f9ff;
+  --teacher-glass-bg: rgba(255, 255, 255, 0.92);
 }
 
-.header-title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 1.3em;
-  font-weight: 700;
-  color: #1a1a1a;
-  margin: 0;
-  text-align: center;
-}
-
-.edit-button {
-  position: absolute;
-  right: 12px;
-  font-size: 1.05em;
-  font-weight: 600;
-  color: #00897b;
-}
-
+/* ---------- Fondo general ---------- */
 .perfil-content {
-  --background: #f7f9fb;
+  --background: linear-gradient(180deg, var(--teacher-bg-start), var(--teacher-bg-end)) !important;
+  background: linear-gradient(180deg, var(--teacher-bg-start), var(--teacher-bg-end)) !important;
   padding: 0;
 }
 
+/* ---------- HEADER CON GRADIENTE Y ALTURA 64px ---------- */
+.header-toolbar {
+  position: relative;
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  --background: transparent !important;
+  --ion-toolbar-background: transparent !important;
+  color: #fff;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-bottom-left-radius: 22px;
+    border-bottom-right-radius: 22px;
+    background: linear-gradient(135deg, var(--teacher-primary), var(--teacher-accent));
+    box-shadow: 0 10px 28px rgba(74,108,247,0.22);
+    z-index: -1;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  ion-title.header-title {
+    flex: 1;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.3em;
+    color: #fff !important;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  ion-button,
+  ion-icon {
+    color: #fff !important;
+    font-size: 1.3em;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .edit-button {
+    position: absolute;
+    right: 12px;
+    font-size: 1.05em;
+    font-weight: 600;
+    color: #fff;
+  }
+}
+
+/* ---------- CABECERA DEL PERFIL ---------- */
 .perfil-header {
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 32px;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin: 20px 16px 32px 16px;
   padding: 24px 16px;
   border-radius: 16px;
+  background: transparent;
 
   .avatar-wrapper {
     position: relative;
@@ -83,6 +126,7 @@
   }
 }
 
+/* ---------- INFO DEL PERFIL ---------- */
 .perfil-info {
   margin-bottom: 32px;
   display: flex;
@@ -128,6 +172,7 @@
   }
 }
 
+/* ---------- ASIGNATURAS ---------- */
 .perfil-section {
   margin-bottom: 32px;
   padding: 0 16px;
@@ -162,13 +207,14 @@
     color: #455a64;
     line-height: 1.6;
     padding: 8px;
-    
+
     ion-card-content {
       padding: 10px;
     }
   }
 }
 
+/* ---------- BOTÓN CERRAR SESIÓN ---------- */
 .logout-section {
   margin-top: 32px;
   margin-bottom: 24px;
@@ -180,5 +226,26 @@
     font-size: 1em;
     height: 48px;
     border-radius: 12px;
+  }
+}
+
+/* ---------- ADAPTACIÓN MÓVIL ---------- */
+@media (max-width: 480px) {
+  .perfil-header .avatar-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .perfil-info .info-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .perfil-info .info-icon-wrapper .info-icon {
+    font-size: 20px;
+  }
+
+  .perfil-section ion-chip {
+    padding: 6px 12px;
   }
 }
