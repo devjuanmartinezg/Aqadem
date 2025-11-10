@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/data/auth.service';
 })
 export class LoginPage {
 
-  codigoCentro = '';
+  codigoHost = '';
   username = '';
   password = '';
   errorMessage = '';
@@ -28,7 +28,7 @@ export class LoginPage {
    */
   onInputChange(event: any, tipo: string) {
     const inputValue = event.target.value;
-    if (tipo === 'codigoCentro') {
+    if (tipo === 'codigoHost') {
       event.target.value = inputValue.replace(/[^a-zA-Z0-9]/g, '');
     }
   }
@@ -44,7 +44,7 @@ export class LoginPage {
    * Inicia sesión normal (preparado para backend).
    */
   login() {
-    if (!this.username || !this.password || !this.codigoCentro) {
+    if (!this.username || !this.password || !this.codigoHost) {
       this.errorMessage = 'Por favor, rellena todos los campos.';
       return;
     }
@@ -52,7 +52,17 @@ export class LoginPage {
     this.loading = true;
     this.errorMessage = '';
 
-    this.authService.login(this.codigoCentro, this.username, this.password)
+    // 🔹 Eliminar token antiguo antes de login
+    this.authService.eliminarToken();
+
+    // 🔹 Log para verificar lo que se envía
+    console.log('Enviando login con:', {
+      username: this.username,
+      password: this.password,
+      codigoHost: this.codigoHost
+    });
+
+    this.authService.login(this.codigoHost, this.username, this.password)
       .subscribe({
         next: (res: any) => {
           this.loading = false;
@@ -70,7 +80,6 @@ export class LoginPage {
           this.loading = false;
           console.error('❌ Error de login:', err);
 
-          // Diferenciamos según el error
           if (err.status === 0) {
             this.errorMessage = 'No se pudo conectar con el servidor.';
           } else if (err.status === 504) {

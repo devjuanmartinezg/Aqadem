@@ -12,12 +12,12 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(codigoCentro: string, username: string, password: string): Observable<any> {
+  login(codigoHost: string, username: string, password: string): Observable<any> {
     const url = `${this.apiUrl}/api/login_check`;
     const body = {
       _username: username,
       _password: password,
-      codigoHost: codigoCentro
+      codigoHost: codigoHost
     };
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
