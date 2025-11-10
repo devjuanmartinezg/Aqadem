@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../services/dashboard.service';
+import { DashboardService } from '../services/data/dashboard.service';
 import { AuthService } from '../services/data/auth.service';
 import { Router } from '@angular/router';
 
@@ -23,43 +23,65 @@ export class DashboardPage implements OnInit {
 
   ngOnInit() {
     this.cargarDatos();
+    this.cargarInfoProfesor();
   }
 
-  cargarDatos() {
-    const token = this.authService.obtenerToken();
-    if (!token) {
-      this.apiStatus = '⚠️ No hay token guardado. Inicia sesión primero.';
-      return;
-    }
-
-    this.dashboardService.getDashboardData(token).subscribe({
-      next: (data) => {
+  /**
+   * Carga los datos principales del dashboard (clases, mensajes, etc.)
+   */
+  cargarDatos(): void {
+    this.dashboardService.getDashboardData().subscribe({
+      next: (data: any) => {
         console.log('✅ Datos recibidos del dashboard:', data);
 
         if (data?.data) {
           this.clasesHoy = data.data.eventos || [];
+          this.mensajesPendientes = data.data.mensajes || [];
           this.apiStatus = '✅ API respondió correctamente (200)';
         } else {
           this.apiStatus = '⚠️ Respuesta vacía del servidor.';
         }
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('❌ Error cargando datos del dashboard:', err);
         this.apiStatus = `❌ Error del servidor: ${err.status || 'desconocido'}`;
       },
     });
   }
 
+  /**
+   * Carga la información del profesor autenticado
+   */
+  cargarInfoProfesor(): void {
+    this.dashboardService.getProfesorInfo().subscribe({
+      next: (info: any) => {
+        console.log('👨‍🏫 Info del profesor:', info);
+        this.nombreProfesor = info?.nombre || 'Profesor';
+      },
+      error: (err: any) => {
+        console.error('❌ Error cargando info profesor:', err);
+      },
+    });
+  }
 
-  verClase(nombreClase: string) {
+  /**
+   * Navega al detalle de una clase
+   */
+  verClase(nombreClase: string): void {
     this.router.navigate(['/clase-detalle', encodeURIComponent(nombreClase)]);
   }
 
-  verTodasClases() {
+  /**
+   * Navega a la lista completa de clases
+   */
+  verTodasClases(): void {
     this.router.navigate(['/tabs/clases']);
   }
 
-  verTodosMensajes() {
+  /**
+   * Navega a la lista completa de mensajes
+   */
+  verTodosMensajes(): void {
     this.router.navigate(['/tabs/mensajes']);
   }
 }

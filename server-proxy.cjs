@@ -2,21 +2,31 @@
 const express = require('express');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const https = require('https');
 
 const app = express();
 
-// Parsear JSON
+// Parsear JSON en requests
 app.use(bodyParser.json());
 
-// CORS para Ionic
+// 🔹 Middleware CORS global para Ionic
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8100');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+
+  // Manejar preflight OPTIONS
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200);
+  }
+
   next();
 });
 
-// Proxy manual
+// 🔹 Proxy para login
 app.post('/api/login_check', async (req, res) => {
   try {
     const { data } = await axios.post(
@@ -24,15 +34,50 @@ app.post('/api/login_check', async (req, res) => {
       req.body,
       {
         headers: { 'Content-Type': 'application/json' },
-        httpsAgent: new (require('https').Agent)({ rejectUnauthorized: false }) // ignora certificado
+        httpsAgent: new https.Agent({ rejectUnauthorized: false })
       }
     );
+    res.json(data);
+  } catch (error) {
+    console.error('❌ Error proxy login:', error.message || error);
+    res.status(error.response?.status || 500).json({
+      error: 'Error occurred while trying to proxy login request',
+      details: error.response?.data || error.message
+    });
+  }
+});
+
+// 🔹 Proxy general para APIs de Aqadem (dashboard, mensajes, etc.)
+app.use('/api/AQADEM', async (req, res) => {
+  // Ignorar OPTIONS porque ya los manejamos arriba
+  if (req.method === 'OPTIONS') return res.sendStatus(200);
+
+  try {
+    const url = `https://api-dev.reqorda.net${req.originalUrl}`;
+
+    const headers = {
+      ...req.headers,
+      host: 'api-dev.reqorda.net',
+    };
+
+    // Pasar Authorization si Angular lo envía
+    if (req.headers['authorization']) {
+      headers['Authorization'] = req.headers['authorization'];
+    }
+
+    const { data } = await axios({
+      method: req.method,
+      url,
+      headers,
+      data: req.body,
+      httpsAgent: new https.Agent({ rejectUnauthorized: false }),
+    });
 
     res.json(data);
   } catch (error) {
-    console.error('❌ Error proxy:', error.message || error);
+    console.error('❌ Error proxy general:', error.message || error);
     res.status(error.response?.status || 500).json({
-      error: 'Error occurred while trying to proxy request',
+      error: 'Proxy error',
       details: error.response?.data || error.message
     });
   }
@@ -41,4 +86,3 @@ app.post('/api/login_check', async (req, res) => {
 app.listen(4300, () => {
   console.log('✅ Proxy activo en http://localhost:4300 → https://api-dev.reqorda.net');
 });
-
