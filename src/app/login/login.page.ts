@@ -23,9 +23,6 @@ export class LoginPage {
     private authService: AuthService
   ) {}
 
-  /**
-   * Permite solo caracteres alfanuméricos en los campos.
-   */
   onInputChange(event: any, tipo: string) {
     const inputValue = event.target.value;
     if (tipo === 'codigoHost') {
@@ -33,16 +30,10 @@ export class LoginPage {
     }
   }
 
-  /**
-   * Muestra u oculta la contraseña.
-   */
   togglePassword() {
     this.showPassword = !this.showPassword;
   }
 
-  /**
-   * Inicia sesión normal (preparado para backend).
-   */
   login() {
     if (!this.username || !this.password || !this.codigoHost) {
       this.errorMessage = 'Por favor, rellena todos los campos.';
@@ -51,15 +42,12 @@ export class LoginPage {
 
     this.loading = true;
     this.errorMessage = '';
-
-    // 🔹 Eliminar token antiguo antes de login
     this.authService.eliminarToken();
 
-    // 🔹 Log para verificar lo que se envía
-    console.log('Enviando login con:', {
-      username: this.username,
-      password: this.password,
-      codigoHost: this.codigoHost
+    console.log('🚀 Enviando login con:', {
+      _username: this.username,
+      _password: this.password,
+      codigoHost: this.codigoHost.toUpperCase()
     });
 
     this.authService.login(this.codigoHost, this.username, this.password)
@@ -67,10 +55,9 @@ export class LoginPage {
         next: (res: any) => {
           this.loading = false;
 
-          if (res.success) {
-            // ✅ Guardamos el token en localStorage
+          if (res.token) {
+            console.log('✅ Token recibido:', res.token);
             this.authService.guardarToken(res.token);
-            console.log('Token recibido:', res.token);
             this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
           } else {
             this.errorMessage = res.message || 'Código, usuario o contraseña incorrectos.';
@@ -79,7 +66,6 @@ export class LoginPage {
         error: (err) => {
           this.loading = false;
           console.error('❌ Error de login:', err);
-
           if (err.status === 0) {
             this.errorMessage = 'No se pudo conectar con el servidor.';
           } else if (err.status === 504) {
@@ -91,9 +77,6 @@ export class LoginPage {
       });
   }
 
-  /**
-   * Inicia sesión con autenticación biométrica (Huella o FaceID).
-   */
   async iniciarConHuella() {
     try {
       const result = await NativeBiometric.isAvailable();

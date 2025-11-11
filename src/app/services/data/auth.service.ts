@@ -1,58 +1,54 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private apiUrl = 'http://localhost:4300'; // proxy local
+  private apiUrl = 'http://localhost:4300/api/login_check';
+  private tokenKey = 'auth_token';
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Realiza el login enviando _username, _password en body
+   * y codigoHost en MAYÚSCULAS en headers.
+   */
   login(codigoHost: string, username: string, password: string): Observable<any> {
-    const url = `${this.apiUrl}/api/login_check`;
     const body = {
       _username: username,
-      _password: password,
-      codigoHost: codigoHost
+      _password: password
     };
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-    return this.http.post(url, body, { headers }).pipe(
-      map((response: any) => {
-        if (response && response.token) {
-          this.guardarToken(response.token);
-          return { success: true, token: response.token };
-        } else {
-          return { success: false, message: 'Respuesta inesperada del servidor.' };
-        }
-      }),
-      catchError(error => {
-        console.error('❌ Error de login:', error);
-        let message = 'Error al conectar con el servidor.';
-        if (error.status === 401) message = 'Credenciales incorrectas.';
-        if (error.status === 504) message = 'El servidor no respondió a tiempo.';
-        return of({ success: false, message });
-      })
-    );
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'codigoHost': (codigoHost || 'TESTAQ').toUpperCase()
+    });
+
+    console.log('📡 Enviando login con body:', body);
+    console.log('📬 Headers enviados →', headers.keys().reduce((acc: any, key: string) => {
+      acc[key] = headers.get(key);
+      return acc;
+    }, {}));
+
+    return this.http.post(this.apiUrl, body, { headers });
   }
 
   guardarToken(token: string) {
-    localStorage.setItem('token', token);
-  }
-
-  obtenerToken(): string | null {
-    return localStorage.getItem('token');
+    localStorage.setItem(this.tokenKey, token);
+    console.log('💾 Token guardado correctamente');
   }
 
   eliminarToken() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(this.tokenKey);
+    console.log('🗑️ Token eliminado');
   }
 
-  estaAutenticado(): boolean {
-    return !!this.obtenerToken();
+  obtenerToken(): string | null {
+    const token = localStorage.getItem(this.tokenKey);
+    console.log('🔍 Token obtenido:', token ? '(existe)' : '(no encontrado)');
+    return token;
   }
 }
