@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/data/dashboard.service';
-import { AuthService } from '../services/data/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,70 +16,44 @@ export class DashboardPage implements OnInit {
 
   constructor(
     private dashboardService: DashboardService,
-    private authService: AuthService,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.cargarDatos();
-    this.cargarInfoProfesor();
   }
 
-  /**
-   * Carga los datos principales del dashboard (clases, mensajes, etc.)
-   */
   cargarDatos(): void {
-    this.dashboardService.getDashboardData().subscribe({
-      next: (data: any) => {
-        console.log('✅ Datos recibidos del dashboard:', data);
+    this.dashboardService.obtenerDashboard().subscribe({
+      next: (res: any) => {
+        console.log('✅ Datos recibidos del dashboard:', res);
 
-        if (data?.data) {
-          this.clasesHoy = data.data.eventos || [];
-          this.mensajesPendientes = data.data.mensajes || [];
-          this.apiStatus = '✅ API respondió correctamente (200)';
+        if (res?.success) {
+          this.clasesHoy = res.data?.eventos || [];
+          this.apiStatus = '✅ API respondió correctamente';
+          this.nombreProfesor = res.data?.nombreProfesor || 'Profesor';
         } else {
-          this.apiStatus = '⚠️ Respuesta vacía del servidor.';
+          this.clasesHoy = [];
+          this.apiStatus = '⚠️ No se pudo cargar la información del dashboard.';
         }
       },
       error: (err: any) => {
-        console.error('❌ Error cargando datos del dashboard:', err);
+        console.error('❌ Error cargando dashboard:', err);
+        this.clasesHoy = [];
         this.apiStatus = `❌ Error del servidor: ${err.status || 'desconocido'}`;
-      },
+      }
     });
   }
 
-  /**
-   * Carga la información del profesor autenticado
-   */
-  cargarInfoProfesor(): void {
-    this.dashboardService.getProfesorInfo().subscribe({
-      next: (info: any) => {
-        console.log('👨‍🏫 Info del profesor:', info);
-        this.nombreProfesor = info?.nombre || 'Profesor';
-      },
-      error: (err: any) => {
-        console.error('❌ Error cargando info profesor:', err);
-      },
-    });
-  }
 
-  /**
-   * Navega al detalle de una clase
-   */
   verClase(nombreClase: string): void {
     this.router.navigate(['/clase-detalle', encodeURIComponent(nombreClase)]);
   }
 
-  /**
-   * Navega a la lista completa de clases
-   */
   verTodasClases(): void {
     this.router.navigate(['/tabs/clases']);
   }
 
-  /**
-   * Navega a la lista completa de mensajes
-   */
   verTodosMensajes(): void {
     this.router.navigate(['/tabs/mensajes']);
   }

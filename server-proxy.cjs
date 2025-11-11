@@ -32,6 +32,7 @@ app.post('/api/login_check', async (req, res) => {
       {
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',       // ← Evita el 406
           'codigoHost': codigoHostHeader
         },
         httpsAgent: new https.Agent({ rejectUnauthorized: false }),
@@ -41,9 +42,9 @@ app.post('/api/login_check', async (req, res) => {
     console.log('✅ Token recibido:', data.token ? '(token OK)' : '(sin token)');
     res.json(data);
   } catch (error) {
-    console.error('❌ Error proxy login:', error.response?.data || error.message);
+    console.error('❌ Proxy error:', error.response?.data || error.message);
     res.status(error.response?.status || 500).json({
-      error: 'Proxy login error',
+      error: 'Proxy error',
       details: error.response?.data || error.message,
     });
   }
@@ -59,6 +60,7 @@ app.use('/api/AQADEM', async (req, res) => {
       ...req.headers,
       host: 'api-dev.reqorda.net',
       'codigoHost': (req.headers['codigohost'] || 'TESTAQ').toUpperCase(),
+      'Accept': 'application/json', // ← Evita futuros 406 en otras llamadas
     };
 
     console.log(`🔹 Proxy general → ${req.method} ${req.originalUrl}`);
