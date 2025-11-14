@@ -13,6 +13,7 @@ export class DashboardPage implements OnInit {
   mensajesPendientes: any[] = [];
   nombreProfesor: string = 'Profesor';
   apiStatus: string = '';
+  loading = true; // ✅ variable para el spinner
 
   constructor(
     private dashboardService: DashboardService,
@@ -24,27 +25,32 @@ export class DashboardPage implements OnInit {
   }
 
   cargarDatos(): void {
+    this.loading = true; // ✅ iniciar spinner
     this.dashboardService.obtenerDashboard().subscribe({
       next: (res: any) => {
         console.log('✅ Datos recibidos del dashboard:', res);
 
         if (res?.success) {
           this.clasesHoy = res.data?.eventos || [];
+          this.mensajesPendientes = res.data?.mensajes || [];
           this.apiStatus = '✅ API respondió correctamente';
           this.nombreProfesor = res.data?.nombreProfesor || 'Profesor';
         } else {
           this.clasesHoy = [];
+          this.mensajesPendientes = [];
           this.apiStatus = '⚠️ No se pudo cargar la información del dashboard.';
         }
+        this.loading = false; // ✅ detener spinner
       },
       error: (err: any) => {
         console.error('❌ Error cargando dashboard:', err);
         this.clasesHoy = [];
+        this.mensajesPendientes = [];
         this.apiStatus = `❌ Error del servidor: ${err.status || 'desconocido'}`;
+        this.loading = false; // ✅ detener spinner
       }
     });
   }
-
 
   verClase(nombreClase: string): void {
     this.router.navigate(['/clase-detalle', encodeURIComponent(nombreClase)]);

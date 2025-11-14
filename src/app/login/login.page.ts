@@ -51,30 +51,23 @@ export class LoginPage {
     });
 
     this.authService.login(this.codigoHost, this.username, this.password)
-      .subscribe({
-        next: (res: any) => {
-          this.loading = false;
-
-          if (res.token) {
-            console.log('✅ Token recibido:', res.token);
-            this.authService.guardarToken(res.token);
-            this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
-          } else {
-            this.errorMessage = res.message || 'Código, usuario o contraseña incorrectos.';
-          }
-        },
-        error: (err) => {
-          this.loading = false;
-          console.error('❌ Error de login:', err);
-          if (err.status === 0) {
-            this.errorMessage = 'No se pudo conectar con el servidor.';
-          } else if (err.status === 504) {
-            this.errorMessage = 'El servidor no respondió a tiempo.';
-          } else {
-            this.errorMessage = 'Ocurrió un error inesperado.';
-          }
+    .subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        if (res.token && res.refresh_token) {
+          this.authService.guardarTokens(res.token, res.refresh_token);
+          this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
+        } else {
+          this.errorMessage = res.message || 'Código, usuario o contraseña incorrectos.';
         }
-      });
+      },
+      error: (err) => {
+        this.loading = false;
+        console.error('❌ Error de login:', err);
+        this.errorMessage = 'Ocurrió un error inesperado.';
+      }
+    });
+
   }
 
   async iniciarConHuella() {

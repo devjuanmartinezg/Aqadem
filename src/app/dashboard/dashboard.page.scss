@@ -198,6 +198,14 @@ ion-toolbar {
   color: #d1d5db;
 }
 
+.spinner-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
 /* ---------- MENSAJES ---------- */
 .message-card {
   display: flex;

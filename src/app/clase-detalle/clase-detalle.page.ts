@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { NavController } from "@ionic/angular";
-import { DataService } from "../services/data/data.service";
+import { ClaseDetalleService } from "../services/data/clase-detalle.service";
 
 @Component({
   selector: "app-clase-detalle",
@@ -13,11 +13,13 @@ export default class ClaseDetallePage implements OnInit {
   claseNombre = "";
   claseId = "";
   alumnos: any[] = [];
+  loading = true;
+  apiStatus = "";
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private navCtrl: NavController,
-    private dataService: DataService,
+    private claseDetalleService: ClaseDetalleService,
     private router: Router
   ) {}
 
@@ -27,28 +29,36 @@ export default class ClaseDetallePage implements OnInit {
       if (idParam) {
         this.claseId = decodeURIComponent(idParam);
         console.log("📘 Cargando clase con código:", this.claseId);
-
-        this.cargarAlumnosDesdeServicio();
+        this.cargarAlumnos();
       }
     });
   }
 
-  cargarAlumnosDesdeServicio() {
-    this.dataService.getClaseDetalle(this.claseId).subscribe({
+  cargarAlumnos() {
+    this.loading = true;
+    this.apiStatus = "";
+
+    this.claseDetalleService.obtenerAlumnos(this.claseId).subscribe({
       next: (alumnos) => {
         console.log("📗 Alumnos recibidos:", alumnos);
-        if (alumnos && alumnos.length > 0) {
-          this.alumnos = alumnos;
+        this.alumnos = alumnos || [];
+
+        if (this.alumnos.length > 0) {
           this.claseNombre = this.claseId;
+          this.apiStatus = `✅ ${this.alumnos.length} alumnos encontrados`;
         } else {
-          this.claseNombre = this.claseId + " (Sin alumnos)";
-          this.alumnos = [];
+          this.claseNombre = `${this.claseId} (Sin alumnos)`;
+          this.apiStatus = "⚠️ No se encontraron alumnos";
         }
+
+        this.loading = false;
       },
       error: (err) => {
         console.error("❌ Error al cargar alumnos:", err);
-        this.claseNombre = this.claseId + " (Error)";
         this.alumnos = [];
+        this.claseNombre = `${this.claseId} (Error)`;
+        this.apiStatus = `❌ Error del servidor: ${err.status || "desconocido"}`;
+        this.loading = false;
       },
     });
   }
@@ -56,19 +66,13 @@ export default class ClaseDetallePage implements OnInit {
   verDetallesAlumno(alumno: any) {
     const alumnoId = alumno.ID || alumno.id;
     if (alumnoId) {
-      console.log("Navegando a detalles del alumno con ID:", alumnoId);
       this.router.navigate(["/alumno-detalle", alumnoId]);
-    } else {
-      console.warn("⚠️ No se encontró ID en el alumno:", alumno);
     }
   }
 
   irATomarAsistencia() {
     if (this.claseId) {
-      console.log("🟢 Navegando a pasar lista para:", this.claseId);
       this.router.navigate(["/pasar-lista", this.claseId]);
-    } else {
-      alert("Error: No se pudo obtener el ID de la clase para pasar lista.");
     }
   }
 
