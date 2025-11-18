@@ -35,7 +35,7 @@ export class DataService {
   }
 
   /**
-   * 📘 Devuelve el detalle de una clase específica (por código textual)
+   * 📘 Devuelve el detalle de una clase específica 
    */
   getClaseDetalle(codigoClase: string): Observable<any[]> {
     if (!codigoClase) {
@@ -58,11 +58,8 @@ export class DataService {
   }
 
 
-  /**
+  /*
    * 👩‍🏫 Devuelve los alumnos pertenecientes a una clase (por su código textual)
-   */
-  /**
- * 👩‍🏫 Devuelve los alumnos pertenecientes a una clase (por su código textual)
  */
   getAlumnosByClaseId(codigoClase: string): Observable<any[]> {
     if (!codigoClase) {

@@ -25,7 +25,7 @@ export class ClaseDetalleService {
     });
 
     const body = {
-      idescuela: 3,                     // parametrizable si quieres
+      idescuela: 3,                     
       codigotitulacion: "SENIOR",
       codigotitulacionnivel: "SENIOR2",
       codigotitulacionnivelunidad: "SENIOR2",
